@@ -1,0 +1,13 @@
+package drive
+
+class Journey {
+	
+	static belongsTo = [vehicle: Vehicle]
+	static hasMany = [sensors : Sensor]
+	
+	int heavyAccelerationCount
+	int heavyBrakingCount
+
+    static constraints = {
+    }
+}

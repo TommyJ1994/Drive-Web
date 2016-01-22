@@ -1,0 +1,9 @@
+package drive
+
+class Journey {
+	
+	hasMany = [sensors : Sensor]
+
+    static constraints = {
+    }
+}

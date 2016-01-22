@@ -1,0 +1,8 @@
+package drive
+
+class Point {
+
+    static constraints = {
+		
+    }
+}

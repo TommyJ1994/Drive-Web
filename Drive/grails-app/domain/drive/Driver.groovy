@@ -2,12 +2,12 @@ package drive
 
 class Driver{
 	
-	int age
+	String gender
 	Date dateOfBirth;
 	String country
 	
     static constraints = {
-		age()
+		gender()
 		dateOfBirth()
 		country()
     }

@@ -17,8 +17,9 @@ class ApiController {
         respond Api.list(params), [status: OK]
     }
 	
+	// ########## THIS WILL LIKELY BE REPLACED BY AND ADD VECHICLE, DRIVER DATA WILL BE ADDED IN SERVICE
 	@Transactional
-	def addNewDriver(int age, String dateOfBirth, String country)
+	def addNewDriver(String gender, String dateOfBirth, String country) 
 	{
 		def data = request.JSON										// Data contains age, DOB and country from phone request 
 		
@@ -33,7 +34,7 @@ class ApiController {
 				
 		// NEW ### curl -i -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/json" -d '{"age": 59, "dateOfBirth": 1994-11-11, "country":italy}' localhost:8080/Drive/api/addNewVehicle
 		
-		vehicleService.addNewDriver(age, dateOfBirth, country)		// Vehicle added in vehicle service
+		vehicleService.addNewDriver(gender, dateOfBirth, country)		// Vehicle added in vehicle service
 		render status: CREATED										// Send 200 OK, all data is 
 	}
 	

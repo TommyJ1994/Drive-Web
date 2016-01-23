@@ -1,0 +1,65 @@
+package drive
+
+
+
+import static org.springframework.http.HttpStatus.*
+import grails.converters.JSON
+import grails.transaction.Transactional
+
+@Transactional(readOnly = true)
+class DriverController {
+
+   // static responseFormats = ['json', 'xml']
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond Driver.list(params) as JSON, [status: OK]
+    }
+
+    @Transactional
+    def save(Driver driverInstance) {
+        if (driverInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        driverInstance.validate()
+        if (driverInstance.hasErrors()) {
+            render status: NOT_ACCEPTABLE
+            return
+        }
+
+        driverInstance.save flush:true
+        respond driverInstance, [status: CREATED]
+    }
+
+    @Transactional
+    def update(Driver driverInstance) {
+        if (driverInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        driverInstance.validate()
+        if (driverInstance.hasErrors()) {
+            render status: NOT_ACCEPTABLE
+            return
+        }
+
+        driverInstance.save flush:true
+        respond driverInstance, [status: OK]
+    }
+
+    @Transactional
+    def delete(Driver driverInstance) {
+
+        if (driverInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        driverInstance.delete flush:true
+        render status: NO_CONTENT
+    }
+}

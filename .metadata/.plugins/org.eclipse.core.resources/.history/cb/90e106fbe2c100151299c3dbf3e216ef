@@ -1,0 +1,22 @@
+package drive
+
+import grails.transaction.Transactional
+
+@Transactional
+class VehicleService {
+	
+	def addNewDriver(age, dateOfBirth, country)
+	{
+		new Driver("age":age, "dateOfBirth":new Date(), "country":country).save()
+	}
+
+    def addNewVehicle() {
+
+    }
+	
+	def generateUniqueID()
+	{
+		
+	}
+	
+}

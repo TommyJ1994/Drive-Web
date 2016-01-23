@@ -1,0 +1,6 @@
+package drive
+
+class Controller {
+
+    def index() { }
+}

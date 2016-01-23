@@ -1,6 +1,6 @@
 package drive
 
-class Driver {
+class Driver{
 	
 	int age
 	Date dateOfBirth;

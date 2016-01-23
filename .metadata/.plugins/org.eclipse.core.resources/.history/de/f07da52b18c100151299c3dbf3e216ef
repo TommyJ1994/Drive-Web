@@ -1,0 +1,6 @@
+package drive
+
+class VehicleRestfulController {
+
+    def index() { }
+}

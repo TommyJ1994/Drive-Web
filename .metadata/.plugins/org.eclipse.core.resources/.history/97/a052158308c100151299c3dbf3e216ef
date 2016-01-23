@@ -1,0 +1,11 @@
+package drive
+
+class Point {
+
+	static belongsTo = [sensor: sensor]
+	String value
+	
+    static constraints = {
+		
+    }
+}

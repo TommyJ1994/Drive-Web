@@ -1,0 +1,17 @@
+package drive
+
+import grails.rest.*
+@Resource(formats=['json', 'xml'])
+
+class Driver {
+	
+	int age
+	Date dateOfBirth;
+	String country
+	
+    static constraints = {
+		age()
+		dateOfBirth()
+		country()
+    }
+}

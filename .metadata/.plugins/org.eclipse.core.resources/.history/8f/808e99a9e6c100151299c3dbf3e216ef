@@ -1,0 +1,85 @@
+package drive
+
+
+import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+
+@Transactional(readOnly = false)
+class ApiController {
+	
+	def vehicleService
+
+    static responseFormats = ['json', 'xml']
+    static allowedMethods = [addNewDriver: "POST",save: "POST", update: "PUT", delete: "DELETE"]
+
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond Api.list(params), [status: OK]
+    }
+	
+	@Transactional
+	def addNewDriver(int age, String dateOfBirth, String country)
+	{
+		def data = request.JSON										// Data contains age, DOB and country from phone request 
+		
+		age = data.age												
+		dateOfBirth = data.dateOfBirth
+		country = data.country
+		
+		if (age == null | dateOfBirth == null | country == null) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
+				
+		// NEW ### curl -i -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/json" -d '{"age": 59, "dateOfBirth": 1994-11-11, "country":italy}' localhost:8080/Drive/api/addNewVehicle
+		
+		vehicleService.addNewDriver(age, dateOfBirth, country)		// Vehicle added in vehicle service
+		render status: CREATED										// Success
+	}
+	
+    @Transactional
+    def save(Api apiInstance) {
+        if (apiInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        apiInstance.validate()
+        if (apiInstance.hasErrors()) {
+            render status: NOT_ACCEPTABLE
+            return
+        }
+		
+        apiInstance.save flush:true
+        respond apiInstance, [status: CREATED]
+    }
+
+    @Transactional
+    def update(Api apiInstance) {
+        if (apiInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        apiInstance.validate()
+        if (apiInstance.hasErrors()) {
+            render status: NOT_ACCEPTABLE
+            return
+        }
+
+        apiInstance.save flush:true
+        respond apiInstance, [status: OK]
+    }
+
+    @Transactional
+    def delete(Api apiInstance) {
+
+        if (apiInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        apiInstance.delete flush:true
+        render status: NO_CONTENT
+    }
+}

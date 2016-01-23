@@ -1,0 +1,17 @@
+package drive
+
+import grails.rest.RestfulController
+
+
+class Driver extends RestfulController {
+	
+	int age
+	Date dateOfBirth;
+	String country
+	
+    static constraints = {
+		age()
+		dateOfBirth()
+		country()
+    }
+}

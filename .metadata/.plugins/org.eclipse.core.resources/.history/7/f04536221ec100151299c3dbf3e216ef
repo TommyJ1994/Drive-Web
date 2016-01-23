@@ -1,0 +1,13 @@
+package drive
+
+import grails.rest.RestfulController
+
+class VehicleRestfulController extends RestfulController {
+    
+    static responseFormats = ['json']
+
+    VehicleRestfulController() {
+        super(Vehicle)
+    }
+
+}

@@ -1,0 +1,16 @@
+package drive
+
+import grails.transaction.Transactional
+
+@Transactional
+class VehicleService {
+
+    def addNewVehicle() {
+
+    }
+	
+	def generateUniqueID()
+	{
+		
+	}
+}

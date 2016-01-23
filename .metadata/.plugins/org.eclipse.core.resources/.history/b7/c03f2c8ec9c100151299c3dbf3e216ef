@@ -1,0 +1,77 @@
+package drive
+
+
+import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+
+@Transactional(readOnly = true)
+class ApiController {
+	
+	def dataConversionService
+
+    static responseFormats = ['json', 'xml']
+    static allowedMethods = [addNewVehicle: "POST",save: "POST", update: "PUT", delete: "DELETE"]
+
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond Api.list(params), [status: OK]
+    }
+	
+	@Transactional
+	def addNewVehicle(int age, String dateOfBirth, String country)
+	{
+		// curl -X POST -H "Cache-Control: no-cache" -H "Postman-Token: b26761d4-e091-0805-0dee-24145fa49a65" 'http://localhost:8080/Drive/api/addNewVehicle?age=93&date=56&country=nigeria'
+		
+		dataConversionService.addNewVehicle(age, dateOfBirth, country)
+	}
+	
+	// getNewVehicleID()
+
+    @Transactional
+    def save(Api apiInstance) {
+        if (apiInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        apiInstance.validate()
+        if (apiInstance.hasErrors()) {
+            render status: NOT_ACCEPTABLE
+            return
+        }
+		
+		dataConversionService.process()
+
+        apiInstance.save flush:true
+        respond apiInstance, [status: CREATED]
+    }
+
+    @Transactional
+    def update(Api apiInstance) {
+        if (apiInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        apiInstance.validate()
+        if (apiInstance.hasErrors()) {
+            render status: NOT_ACCEPTABLE
+            return
+        }
+
+        apiInstance.save flush:true
+        respond apiInstance, [status: OK]
+    }
+
+    @Transactional
+    def delete(Api apiInstance) {
+
+        if (apiInstance == null) {
+            render status: NOT_FOUND
+            return
+        }
+
+        apiInstance.delete flush:true
+        render status: NO_CONTENT
+    }
+}

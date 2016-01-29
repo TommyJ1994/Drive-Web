@@ -3,7 +3,7 @@ package drive
 class Driver{
 	
 	String gender
-	Date dateOfBirth;
+	Date dateOfBirth
 	String country
 	
     static constraints = {

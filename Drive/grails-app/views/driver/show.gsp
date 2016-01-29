@@ -23,11 +23,11 @@
 			</g:if>
 			<ol class="property-list driver">
 			
-				<g:if test="${driverInstance?.age}">
+				<g:if test="${driverInstance?.gender}">
 				<li class="fieldcontain">
-					<span id="age-label" class="property-label"><g:message code="driver.age.label" default="Age" /></span>
+					<span id="gender-label" class="property-label"><g:message code="driver.gender.label" default="Gender" /></span>
 					
-						<span class="property-value" aria-labelledby="age-label"><g:fieldValue bean="${driverInstance}" field="age"/></span>
+						<span class="property-value" aria-labelledby="gender-label"><g:fieldValue bean="${driverInstance}" field="gender"/></span>
 					
 				</li>
 				</g:if>

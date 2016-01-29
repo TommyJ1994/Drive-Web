@@ -2,12 +2,12 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: driverInstance, field: 'age', 'error')} required">
-	<label for="age">
-		<g:message code="driver.age.label" default="Age" />
+<div class="fieldcontain ${hasErrors(bean: driverInstance, field: 'gender', 'error')} required">
+	<label for="gender">
+		<g:message code="driver.gender.label" default="Gender" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field name="age" type="number" value="${driverInstance.age}" required=""/>
+	<g:textField name="gender" required="" value="${driverInstance?.gender}"/>
 
 </div>
 

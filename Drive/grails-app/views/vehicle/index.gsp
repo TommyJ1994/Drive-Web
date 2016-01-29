@@ -28,13 +28,13 @@
 					
 						<th><g:message code="vehicle.driver.label" default="Driver" /></th>
 					
-						<g:sortableColumn property="manufacturer" title="${message(code: 'vehicle.manufacturer.label', default: 'Manufacturer')}" />
+						<g:sortableColumn property="make" title="${message(code: 'vehicle.make.label', default: 'Make')}" />
 					
 						<g:sortableColumn property="model" title="${message(code: 'vehicle.model.label', default: 'Model')}" />
 					
 						<g:sortableColumn property="year" title="${message(code: 'vehicle.year.label', default: 'Year')}" />
 					
-						<g:sortableColumn property="engineSize" title="${message(code: 'vehicle.engineSize.label', default: 'Engine Size')}" />
+						<g:sortableColumn property="engineConfiguration" title="${message(code: 'vehicle.engineConfiguration.label', default: 'Engine Configuration')}" />
 					
 					</tr>
 				</thead>
@@ -46,13 +46,13 @@
 					
 						<td>${fieldValue(bean: vehicleInstance, field: "driver")}</td>
 					
-						<td>${fieldValue(bean: vehicleInstance, field: "manufacturer")}</td>
+						<td>${fieldValue(bean: vehicleInstance, field: "make")}</td>
 					
 						<td>${fieldValue(bean: vehicleInstance, field: "model")}</td>
 					
 						<td>${fieldValue(bean: vehicleInstance, field: "year")}</td>
 					
-						<td>${fieldValue(bean: vehicleInstance, field: "engineSize")}</td>
+						<td>${fieldValue(bean: vehicleInstance, field: "engineConfiguration")}</td>
 					
 					</tr>
 				</g:each>

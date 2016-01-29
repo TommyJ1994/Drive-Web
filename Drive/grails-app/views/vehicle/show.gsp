@@ -41,11 +41,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${vehicleInstance?.manufacturer}">
+				<g:if test="${vehicleInstance?.make}">
 				<li class="fieldcontain">
-					<span id="manufacturer-label" class="property-label"><g:message code="vehicle.manufacturer.label" default="Manufacturer" /></span>
+					<span id="make-label" class="property-label"><g:message code="vehicle.make.label" default="Make" /></span>
 					
-						<span class="property-value" aria-labelledby="manufacturer-label"><g:fieldValue bean="${vehicleInstance}" field="manufacturer"/></span>
+						<span class="property-value" aria-labelledby="make-label"><g:fieldValue bean="${vehicleInstance}" field="make"/></span>
 					
 				</li>
 				</g:if>
@@ -68,6 +68,60 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${vehicleInstance?.engineConfiguration}">
+				<li class="fieldcontain">
+					<span id="engineConfiguration-label" class="property-label"><g:message code="vehicle.engineConfiguration.label" default="Engine Configuration" /></span>
+					
+						<span class="property-value" aria-labelledby="engineConfiguration-label"><g:fieldValue bean="${vehicleInstance}" field="engineConfiguration"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.engineDisplacement}">
+				<li class="fieldcontain">
+					<span id="engineDisplacement-label" class="property-label"><g:message code="vehicle.engineDisplacement.label" default="Engine Displacement" /></span>
+					
+						<span class="property-value" aria-labelledby="engineDisplacement-label"><g:fieldValue bean="${vehicleInstance}" field="engineDisplacement"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.manufacturerEngineCode}">
+				<li class="fieldcontain">
+					<span id="manufacturerEngineCode-label" class="property-label"><g:message code="vehicle.manufacturerEngineCode.label" default="Manufacturer Engine Code" /></span>
+					
+						<span class="property-value" aria-labelledby="manufacturerEngineCode-label"><g:fieldValue bean="${vehicleInstance}" field="manufacturerEngineCode"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.totalEngineValves}">
+				<li class="fieldcontain">
+					<span id="totalEngineValves-label" class="property-label"><g:message code="vehicle.totalEngineValves.label" default="Total Engine Valves" /></span>
+					
+						<span class="property-value" aria-labelledby="totalEngineValves-label"><g:fieldValue bean="${vehicleInstance}" field="totalEngineValves"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.cylinders}">
+				<li class="fieldcontain">
+					<span id="cylinders-label" class="property-label"><g:message code="vehicle.cylinders.label" default="Cylinders" /></span>
+					
+						<span class="property-value" aria-labelledby="cylinders-label"><g:fieldValue bean="${vehicleInstance}" field="cylinders"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.compressionRatio}">
+				<li class="fieldcontain">
+					<span id="compressionRatio-label" class="property-label"><g:message code="vehicle.compressionRatio.label" default="Compression Ratio" /></span>
+					
+						<span class="property-value" aria-labelledby="compressionRatio-label"><g:fieldValue bean="${vehicleInstance}" field="compressionRatio"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${vehicleInstance?.engineSize}">
 				<li class="fieldcontain">
 					<span id="engineSize-label" class="property-label"><g:message code="vehicle.engineSize.label" default="Engine Size" /></span>
@@ -77,11 +131,137 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${vehicleInstance?.horsepower}">
+				<li class="fieldcontain">
+					<span id="horsepower-label" class="property-label"><g:message code="vehicle.horsepower.label" default="Horsepower" /></span>
+					
+						<span class="property-value" aria-labelledby="horsepower-label"><g:fieldValue bean="${vehicleInstance}" field="horsepower"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.torque}">
+				<li class="fieldcontain">
+					<span id="torque-label" class="property-label"><g:message code="vehicle.torque.label" default="Torque" /></span>
+					
+						<span class="property-value" aria-labelledby="torque-label"><g:fieldValue bean="${vehicleInstance}" field="torque"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${vehicleInstance?.fuelType}">
 				<li class="fieldcontain">
 					<span id="fuelType-label" class="property-label"><g:message code="vehicle.fuelType.label" default="Fuel Type" /></span>
 					
 						<span class="property-value" aria-labelledby="fuelType-label"><g:fieldValue bean="${vehicleInstance}" field="fuelType"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.drivenWheels}">
+				<li class="fieldcontain">
+					<span id="drivenWheels-label" class="property-label"><g:message code="vehicle.drivenWheels.label" default="Driven Wheels" /></span>
+					
+						<span class="property-value" aria-labelledby="drivenWheels-label"><g:fieldValue bean="${vehicleInstance}" field="drivenWheels"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.transmissionType}">
+				<li class="fieldcontain">
+					<span id="transmissionType-label" class="property-label"><g:message code="vehicle.transmissionType.label" default="Transmission Type" /></span>
+					
+						<span class="property-value" aria-labelledby="transmissionType-label"><g:fieldValue bean="${vehicleInstance}" field="transmissionType"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.vehicleStyle}">
+				<li class="fieldcontain">
+					<span id="vehicleStyle-label" class="property-label"><g:message code="vehicle.vehicleStyle.label" default="Vehicle Style" /></span>
+					
+						<span class="property-value" aria-labelledby="vehicleStyle-label"><g:fieldValue bean="${vehicleInstance}" field="vehicleStyle"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.numberOfSpeeds}">
+				<li class="fieldcontain">
+					<span id="numberOfSpeeds-label" class="property-label"><g:message code="vehicle.numberOfSpeeds.label" default="Number Of Speeds" /></span>
+					
+						<span class="property-value" aria-labelledby="numberOfSpeeds-label"><g:fieldValue bean="${vehicleInstance}" field="numberOfSpeeds"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.numOfDoors}">
+				<li class="fieldcontain">
+					<span id="numOfDoors-label" class="property-label"><g:message code="vehicle.numOfDoors.label" default="Num Of Doors" /></span>
+					
+						<span class="property-value" aria-labelledby="numOfDoors-label"><g:fieldValue bean="${vehicleInstance}" field="numOfDoors"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.mpgHighway}">
+				<li class="fieldcontain">
+					<span id="mpgHighway-label" class="property-label"><g:message code="vehicle.mpgHighway.label" default="Mpg Highway" /></span>
+					
+						<span class="property-value" aria-labelledby="mpgHighway-label"><g:fieldValue bean="${vehicleInstance}" field="mpgHighway"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.mpgCity}">
+				<li class="fieldcontain">
+					<span id="mpgCity-label" class="property-label"><g:message code="vehicle.mpgCity.label" default="Mpg City" /></span>
+					
+						<span class="property-value" aria-labelledby="mpgCity-label"><g:fieldValue bean="${vehicleInstance}" field="mpgCity"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.newPrice}">
+				<li class="fieldcontain">
+					<span id="newPrice-label" class="property-label"><g:message code="vehicle.newPrice.label" default="New Price" /></span>
+					
+						<span class="property-value" aria-labelledby="newPrice-label"><g:fieldValue bean="${vehicleInstance}" field="newPrice"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.usedPrice}">
+				<li class="fieldcontain">
+					<span id="usedPrice-label" class="property-label"><g:message code="vehicle.usedPrice.label" default="Used Price" /></span>
+					
+						<span class="property-value" aria-labelledby="usedPrice-label"><g:fieldValue bean="${vehicleInstance}" field="usedPrice"/></span>
+					
+				</li>
+				</g:if>
+
+				<g:if test="${vehicleInstance?.colourNames}">
+				<li class="fieldcontain">
+					<span id="colourNames-label" class="property-label"><g:message code="vehicle.colourNames.label" default="Colour Names" /></span>
+					
+						<span class="property-value" aria-labelledby="colourNames-label"><g:fieldValue bean="${vehicleInstance}" field="colourNames"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.colourCodes}">
+				<li class="fieldcontain">
+					<span id="colourCodes-label" class="property-label"><g:message code="vehicle.colourCodes.label" default="Colour Codes" /></span>
+					
+						<span class="property-value" aria-labelledby="colourCodes-label"><g:fieldValue bean="${vehicleInstance}" field="colourCodes"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${vehicleInstance?.features}">
+				<li class="fieldcontain">
+					<span id="features-label" class="property-label"><g:message code="vehicle.features.label" default="Features" /></span>
+					
+						<span class="property-value" aria-labelledby="features-label"><g:fieldValue bean="${vehicleInstance}" field="features"/></span>
 					
 				</li>
 				</g:if>

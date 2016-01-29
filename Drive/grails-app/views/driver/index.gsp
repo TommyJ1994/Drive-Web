@@ -24,7 +24,7 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="age" title="${message(code: 'driver.age.label', default: 'Age')}" />
+						<g:sortableColumn property="gender" title="${message(code: 'driver.gender.label', default: 'Gender')}" />
 					
 						<g:sortableColumn property="dateOfBirth" title="${message(code: 'driver.dateOfBirth.label', default: 'Date Of Birth')}" />
 					
@@ -36,7 +36,7 @@
 				<g:each in="${driverInstanceList}" status="i" var="driverInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${driverInstance.id}">${fieldValue(bean: driverInstance, field: "age")}</g:link></td>
+						<td><g:link action="show" id="${driverInstance.id}">${fieldValue(bean: driverInstance, field: "gender")}</g:link></td>
 					
 						<td><g:formatDate date="${driverInstance.dateOfBirth}" /></td>
 					

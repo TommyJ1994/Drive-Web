@@ -19,7 +19,7 @@ class ApiController {
     static responseFormats = ['json', 'xml']
 	
 	// Allowed Methods to Interact with Resources
-    static allowedMethods = [addNewJourney: "POST", addNewVehicle: "POST",save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [addNewJourney: "POST", addNewVehicle: "POST", delete: "DELETE"]
 
 	/**
 	 * 
@@ -143,7 +143,8 @@ class ApiController {
 	}
 	
 	/**
-	 * 
+	 * Receives journey data from the phone and adds it to the database 
+	 * after the data manipulation has been carried out
  	*/
 	@Transactional
 	def addNewJourney(String vehicleData)
@@ -155,46 +156,6 @@ class ApiController {
 		// Send 200 OK, all data is valid and saved to DB
 		render status: CREATED
 	}
-	
-	/**
-	 * 
- 	*/
-    @Transactional
-    def save(Api apiInstance) {
-        if (apiInstance == null) {
-            render status: NOT_FOUND
-            return
-        }
-
-        apiInstance.validate()
-        if (apiInstance.hasErrors()) {
-            render status: NOT_ACCEPTABLE
-            return
-        }
-		
-        apiInstance.save flush:true
-        respond apiInstance, [status: CREATED]
-    }
-
-    /**
-	 * 
- 	*/
-    @Transactional
-    def update(Api apiInstance) {
-        if (apiInstance == null) {
-            render status: NOT_FOUND
-            return
-        }
-
-        apiInstance.validate()
-        if (apiInstance.hasErrors()) {
-            render status: NOT_ACCEPTABLE
-            return
-        }
-
-        apiInstance.save flush:true
-        respond apiInstance, [status: OK]
-    }
 
     /**
 	 * 

@@ -1,8 +1,8 @@
 package drive
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import groovy.json.JsonSlurper
 
 @Transactional(readOnly = false)
 class ApiController {
@@ -10,32 +10,111 @@ class ApiController {
 	def vehicleService
 
     static responseFormats = ['json', 'xml']
-    static allowedMethods = [addNewDriver: "POST",save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [addNewJourney: "POST", addNewVehicle: "POST",save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Api.list(params), [status: OK]
     }
 	
-	// ########## THIS WILL LIKELY BE REPLACED BY AND ADD VECHICLE, DRIVER DATA WILL BE ADDED IN SERVICE
+	// NEW ### curl -i -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/json" -d '{"age": 59, "dateOfBirth": 1994-11-11, "country":italy}' localhost:8080/Drive/api/addNewVehicle
+	
+	
 	@Transactional
-	def addNewDriver(String gender, String dateOfBirth, String country) 
+	def addNewVehicle(String properties) 
 	{
-		def data = request.JSON										// Data contains age, DOB and country from phone request 
+		def data = request.JSON										// Data contains vehicle + driver information 
 		
-		age = data.age												
-		dateOfBirth = data.dateOfBirth
-		country = data.country
+		def dateOfBirth = data.dateOfBirth;
+		def gender = data.gender;
+		def country = data.country;
 		
-		if (age == null | dateOfBirth == null | country == null) {
+		def jsonSlurper = new JsonSlurper()
+		def carData = data.carData
+						
+		String id = vehicleService.generateUniqueID();
+		
+		if (dateOfBirth == null | gender == null | country == null | carData.year.year == null) {
 			render status: NOT_ACCEPTABLE							// Send 405, some of the data is null
 			return
 		}
 				
-		// NEW ### curl -i -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/json" -d '{"age": 59, "dateOfBirth": 1994-11-11, "country":italy}' localhost:8080/Drive/api/addNewVehicle
+		def driver = new Driver("gender": gender, "dateOfBirth": Date.parse( 'dd-MM-yyyy', dateOfBirth ), "country": country)
+		driver.save()
 		
-		vehicleService.addNewDriver(gender, dateOfBirth, country)		// Vehicle added in vehicle service
-		render status: CREATED										// Send 200 OK, all data is 
+		def colourNames = []
+		def colourCodes = []
+		
+		for(int i = 0; i < carData.colors.size(); i++)
+		{
+			for(int j = 0; j < carData.colors[i].options.size(); j++)
+			{
+				colourNames[i] = carData.colors[i].options[j].name
+				colourCodes[i] = carData.colors[i].options[j].colorChips?.primary?.hex
+			}
+
+		}
+		
+		def features = []
+		
+		for(int i = 0; i < carData.options.size(); i++)
+		{
+			for(int j = 0; j < carData.options[i].options.size(); j++)
+			{
+				features[i] = carData.options[i].options[j].name
+			}
+		}
+		
+			
+		def vehicle = new Vehicle("identifier": id, 
+					"driver": driver, 
+					"year": carData.year?.year,
+					"make": carData.make?.name,
+					"model": carData.model?.name,
+					"engineConfiguration": carData.engine?.configuration,
+					"compressionRatio": carData.engine?.compressionRatio,
+					"engineDisplacement": carData.engine?.displacement,
+					"engineSize": carData.engine?.size,
+					"cylinders": carData.engine?.cylinder,
+					"manufacturerEngineCode": carData.engine?.manufacturerEngineCode,
+					"fuelType": carData.engine?.fuelType,
+					"horsepower": carData.engine?.horsepower,
+					"torque": carData.engine?.torque,
+					"totalEngineValves": carData.engine?.totalValves,
+					"transmissionType": carData.transmission?.transmissionType,
+					"numberOfSpeeds": carData.transmission?.numberOfSpeeds,
+					"drivenWheels": carData.options?.drivenWheels,
+					"vehicleClass": carData.categories?.EPAClass,
+					"vehicleStyle": carData.categories?.vehicleStyle,
+					"numOfDoors": carData.numOfDoors,
+					"mpgHighway": carData.MPG?.highway,
+					"mpgCity": carData.MPG?.city,
+					"newPrice": carData.price?.baseMSRP,
+					"usedPrice": carData.price?.usedPrivateParty,
+					"colourNames": colourNames,
+					"colourCodes": colourCodes,
+					"features": features)
+		
+		vehicle.validate()
+		if (vehicle.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			println vehicle.errors
+			return
+		}
+		
+		vehicle.save()		
+			
+		render status: CREATED											// Send 200 OK, all data is 
+	}
+	
+	@Transactional
+	def addNewJourney(String vehicleData)
+	{
+		def data = request.JSON	
+		
+		println data
+				
+		render status: CREATED										// Send 200 OK, all data is
 	}
 	
     @Transactional

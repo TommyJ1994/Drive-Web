@@ -52,7 +52,7 @@ class ApiController {
 		// Check if some of the key attributes are null
 		if (dateOfBirth == null | gender == null | country == null | carData.model.name== null | carData.make.name == null | carData.year.year == null) {
 			// Send 405 if any of the key data is null
-			render status: NOT_ACCEPTABLE							
+			respond status: NOT_ACCEPTABLE							
 			return
 		}
 		
@@ -62,7 +62,7 @@ class ApiController {
 		// validate that the driver attributes obey the constraints set out in the domain class
 		driver.validate()
 		if (driver.hasErrors()) {
-			render status: NOT_ACCEPTABLE
+			respond status: NOT_ACCEPTABLE
 			println driver.errors
 			return
 		}
@@ -70,32 +70,12 @@ class ApiController {
 		// save the driver to the database
 		driver.save()
 		
-		// Sets to hold colour names/codes
-		def colourNames = []
-		def colourCodes = []
-		
-		// Extract colour names/codes from the carData structure and ass them to the sets
-		for(int i = 0; i < carData.colors.size(); i++)
-		{
-			for(int j = 0; j < carData.colors[i].options.size(); j++)
-			{
-				colourNames[i] = carData.colors[i].options[j].name
-				colourCodes[i] = carData.colors[i].options[j].colorChips?.primary?.hex
-			}
-
-		}
+		// get the colour codes/names
+		def colourCodes = vehicleService.getColourCodes(carData)
+		def colourNames = vehicleService.getColourNames(carData)
 		
 		// Set to hold cars notable features list
-		def features = []
-		
-		// Extract features from the carData structure and ass them to the features set
-		for(int i = 0; i < carData.options.size(); i++)
-		{
-			for(int j = 0; j < carData.options[i].options.size(); j++)
-			{
-				features[i] = carData.options[i].options[j].name
-			}
-		}
+		def features = vehicleService.getFeatures(carData)
 		
 		// create the new vehicle object
 		def vehicle = new Vehicle("identifier": id, 
@@ -130,7 +110,7 @@ class ApiController {
 		// validate that the vehicle attributes obey the constraints set out in the domain class
 		vehicle.validate()
 		if (vehicle.hasErrors()) {
-			render status: NOT_ACCEPTABLE
+			respond status: NOT_ACCEPTABLE
 			println vehicle.errors
 			return
 		}
@@ -139,7 +119,7 @@ class ApiController {
 		vehicle.save()	
 
 		// New driver/vehicle created sucessfully
-		render status: CREATED											
+		respond status: CREATED, id: id									
 	}
 	
 	/**
@@ -151,7 +131,8 @@ class ApiController {
 	{
 		def data = request.JSON	
 		
-		println data
+		// Send the data to be prcoessed by the manuipulation service
+		journeyDataManipulationService.processData(data);
 		
 		// Send 200 OK, all data is valid and saved to DB
 		render status: CREATED

@@ -26,7 +26,10 @@ class VehicleService {
 		return stringBuilder.toString();
 	}
 
-
+	/**
+	 * Gets the various colour codes for the vehicle
+	 * @param carData - the data from the car
+	 */
 	def getColourCodes(def carData)
 	{
 		// Sets to hold colour codes
@@ -44,6 +47,10 @@ class VehicleService {
 	}
 
 
+	/**
+	 * Gets the various colour names for the vehicle
+	 * @param carData - the data from the car
+	 */
 	def getColourNames(def carData)
 	{
 		// Sets to hold colour names
@@ -60,6 +67,11 @@ class VehicleService {
 		return colourNames
 	}
 	
+	
+	/**
+	 * Gets the various features for the vehicle
+	 * @param carData - the data from the car
+	 */
 	def getFeatures(def carData)
 	{
 		// Set to hold features

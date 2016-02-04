@@ -10,7 +10,6 @@ class Vehicle {
 	Integer year, cylinders, engineDisplacement, totalEngineValves, numOfDoors, mpgHighway, mpgCity, newPrice, usedPrice
 	Double compressionRatio, engineSize, horsepower, torque
 	
-
     static constraints = {
 		identifier blank:false
 		driver blank:false

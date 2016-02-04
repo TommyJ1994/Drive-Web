@@ -139,7 +139,7 @@ class ApiController {
 	}
 
     /**
-	 * 
+	 * Delete a vehicle 
  	*/
     @Transactional
     def delete(Api apiInstance) {

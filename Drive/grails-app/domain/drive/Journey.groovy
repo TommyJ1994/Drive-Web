@@ -1,5 +1,8 @@
 package drive
 
+import java.text.ParsePosition
+import java.text.SimpleDateFormat
+
 class Journey {
 	
 	static belongsTo = [vehicle: Vehicle]
@@ -8,12 +11,24 @@ class Journey {
 	Date startTime
 	Date endTime
 	
-	int heavyAccelerationCount
-	int heavyBrakingCount
+	Integer journeyTimeLength // in minutes
 	
-	// int averageSpeed
-	// int averageRPM
+	Integer heavyAccelerationCount
+	Integer heavyBrakingCount
+	
+	Integer averageSpeed
+	Integer averageRPM
 
+	Integer topSpeed
+	Integer topRPM
+	
     static constraints = {
+		journeyTimeLength(nullable:false)
+		heavyAccelerationCount(nullable:false)
+		heavyBrakingCount(nullable:false)
+		averageSpeed(nullable:false)
+		averageRPM(nullable:false)
+		topSpeed(nullable:false)
+		topRPM(nullable:false)
     }
 }

@@ -3,7 +3,7 @@ package drive
 import grails.transaction.Transactional
 
 /**
-* Logic for vehicle class.
+* Logic for generating field values for the vehicle domain class.
 */
 
 @Transactional

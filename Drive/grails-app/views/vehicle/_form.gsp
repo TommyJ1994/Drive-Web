@@ -56,12 +56,12 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'engineDisplacement', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'engineDisplacement', 'error')} ">
 	<label for="engineDisplacement">
 		<g:message code="vehicle.engineDisplacement.label" default="Engine Displacement" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="engineDisplacement" type="number" value="${vehicleInstance.engineDisplacement}" required=""/>
+	<g:field name="engineDisplacement" type="number" value="${vehicleInstance.engineDisplacement}"/>
 
 </div>
 
@@ -74,21 +74,21 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'totalEngineValves', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'totalEngineValves', 'error')} ">
 	<label for="totalEngineValves">
 		<g:message code="vehicle.totalEngineValves.label" default="Total Engine Valves" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="totalEngineValves" type="number" value="${vehicleInstance.totalEngineValves}" required=""/>
+	<g:field name="totalEngineValves" type="number" value="${vehicleInstance.totalEngineValves}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'cylinders', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'cylinders', 'error')} ">
 	<label for="cylinders">
 		<g:message code="vehicle.cylinders.label" default="Cylinders" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="cylinders" type="number" value="${vehicleInstance.cylinders}" required=""/>
+	<g:field name="cylinders" type="number" value="${vehicleInstance.cylinders}"/>
 
 </div>
 
@@ -164,57 +164,66 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'numberOfSpeeds', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'vehicleClass', 'error')} ">
+	<label for="vehicleClass">
+		<g:message code="vehicle.vehicleClass.label" default="Vehicle Class" />
+		
+	</label>
+	<g:textField name="vehicleClass" value="${vehicleInstance?.vehicleClass}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'numberOfSpeeds', 'error')} ">
 	<label for="numberOfSpeeds">
 		<g:message code="vehicle.numberOfSpeeds.label" default="Number Of Speeds" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="numberOfSpeeds" type="number" value="${vehicleInstance.numberOfSpeeds}" required=""/>
+	<g:textField name="numberOfSpeeds" value="${vehicleInstance?.numberOfSpeeds}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'numOfDoors', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'numOfDoors', 'error')} ">
 	<label for="numOfDoors">
 		<g:message code="vehicle.numOfDoors.label" default="Num Of Doors" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="numOfDoors" type="number" value="${vehicleInstance.numOfDoors}" required=""/>
+	<g:field name="numOfDoors" type="number" value="${vehicleInstance.numOfDoors}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'mpgHighway', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'mpgHighway', 'error')} ">
 	<label for="mpgHighway">
 		<g:message code="vehicle.mpgHighway.label" default="Mpg Highway" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="mpgHighway" type="number" value="${vehicleInstance.mpgHighway}" required=""/>
+	<g:field name="mpgHighway" type="number" value="${vehicleInstance.mpgHighway}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'mpgCity', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'mpgCity', 'error')} ">
 	<label for="mpgCity">
 		<g:message code="vehicle.mpgCity.label" default="Mpg City" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="mpgCity" type="number" value="${vehicleInstance.mpgCity}" required=""/>
+	<g:field name="mpgCity" type="number" value="${vehicleInstance.mpgCity}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'newPrice', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'newPrice', 'error')} ">
 	<label for="newPrice">
 		<g:message code="vehicle.newPrice.label" default="New Price" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="newPrice" type="number" value="${vehicleInstance.newPrice}" required=""/>
+	<g:field name="newPrice" type="number" value="${vehicleInstance.newPrice}"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'usedPrice', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: vehicleInstance, field: 'usedPrice', 'error')} ">
 	<label for="usedPrice">
 		<g:message code="vehicle.usedPrice.label" default="Used Price" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:field name="usedPrice" type="number" value="${vehicleInstance.usedPrice}" required=""/>
+	<g:field name="usedPrice" type="number" value="${vehicleInstance.usedPrice}"/>
 
 </div>
 
@@ -223,7 +232,7 @@
 		<g:message code="vehicle.colourNames.label" default="Colour Names" />
 		
 	</label>
-	<g:textField name="colourNames" value="${vehicleInstance?.colourNames}"/>
+	
 
 </div>
 
@@ -232,7 +241,7 @@
 		<g:message code="vehicle.colourCodes.label" default="Colour Codes" />
 		
 	</label>
-	<g:textField name="colourCodes" value="${vehicleInstance?.colourCodes}"/>
+	
 
 </div>
 
@@ -241,7 +250,7 @@
 		<g:message code="vehicle.features.label" default="Features" />
 		
 	</label>
-	<g:textField name="features" value="${vehicleInstance?.features}"/>
+	
 
 </div>
 

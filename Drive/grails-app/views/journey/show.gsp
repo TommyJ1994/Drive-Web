@@ -23,11 +23,11 @@
 			</g:if>
 			<ol class="property-list journey">
 			
-				<g:if test="${journeyInstance?.endTime}">
+				<g:if test="${journeyInstance?.journeyTimeLength}">
 				<li class="fieldcontain">
-					<span id="endTime-label" class="property-label"><g:message code="journey.endTime.label" default="End Time" /></span>
+					<span id="journeyTimeLength-label" class="property-label"><g:message code="journey.journeyTimeLength.label" default="Journey Time Length" /></span>
 					
-						<span class="property-value" aria-labelledby="endTime-label"><g:formatDate date="${journeyInstance?.endTime}" /></span>
+						<span class="property-value" aria-labelledby="journeyTimeLength-label"><g:fieldValue bean="${journeyInstance}" field="journeyTimeLength"/></span>
 					
 				</li>
 				</g:if>
@@ -46,6 +46,51 @@
 					<span id="heavyBrakingCount-label" class="property-label"><g:message code="journey.heavyBrakingCount.label" default="Heavy Braking Count" /></span>
 					
 						<span class="property-value" aria-labelledby="heavyBrakingCount-label"><g:fieldValue bean="${journeyInstance}" field="heavyBrakingCount"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${journeyInstance?.averageSpeed}">
+				<li class="fieldcontain">
+					<span id="averageSpeed-label" class="property-label"><g:message code="journey.averageSpeed.label" default="Average Speed" /></span>
+					
+						<span class="property-value" aria-labelledby="averageSpeed-label"><g:fieldValue bean="${journeyInstance}" field="averageSpeed"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${journeyInstance?.averageRPM}">
+				<li class="fieldcontain">
+					<span id="averageRPM-label" class="property-label"><g:message code="journey.averageRPM.label" default="Average RPM" /></span>
+					
+						<span class="property-value" aria-labelledby="averageRPM-label"><g:fieldValue bean="${journeyInstance}" field="averageRPM"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${journeyInstance?.topSpeed}">
+				<li class="fieldcontain">
+					<span id="topSpeed-label" class="property-label"><g:message code="journey.topSpeed.label" default="Top Speed" /></span>
+					
+						<span class="property-value" aria-labelledby="topSpeed-label"><g:fieldValue bean="${journeyInstance}" field="topSpeed"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${journeyInstance?.topRPM}">
+				<li class="fieldcontain">
+					<span id="topRPM-label" class="property-label"><g:message code="journey.topRPM.label" default="Top RPM" /></span>
+					
+						<span class="property-value" aria-labelledby="topRPM-label"><g:fieldValue bean="${journeyInstance}" field="topRPM"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${journeyInstance?.endTime}">
+				<li class="fieldcontain">
+					<span id="endTime-label" class="property-label"><g:message code="journey.endTime.label" default="End Time" /></span>
+					
+						<span class="property-value" aria-labelledby="endTime-label"><g:formatDate date="${journeyInstance?.endTime}" /></span>
 					
 				</li>
 				</g:if>

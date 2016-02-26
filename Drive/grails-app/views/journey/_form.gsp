@@ -2,12 +2,12 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: journeyInstance, field: 'endTime', 'error')} required">
-	<label for="endTime">
-		<g:message code="journey.endTime.label" default="End Time" />
+<div class="fieldcontain ${hasErrors(bean: journeyInstance, field: 'journeyTimeLength', 'error')} required">
+	<label for="journeyTimeLength">
+		<g:message code="journey.journeyTimeLength.label" default="Journey Time Length" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="endTime" precision="day"  value="${journeyInstance?.endTime}"  />
+	<g:field name="journeyTimeLength" type="number" value="${journeyInstance.journeyTimeLength}" required=""/>
 
 </div>
 
@@ -26,6 +26,51 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<g:field name="heavyBrakingCount" type="number" value="${journeyInstance.heavyBrakingCount}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: journeyInstance, field: 'averageSpeed', 'error')} required">
+	<label for="averageSpeed">
+		<g:message code="journey.averageSpeed.label" default="Average Speed" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="averageSpeed" type="number" value="${journeyInstance.averageSpeed}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: journeyInstance, field: 'averageRPM', 'error')} required">
+	<label for="averageRPM">
+		<g:message code="journey.averageRPM.label" default="Average RPM" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="averageRPM" type="number" value="${journeyInstance.averageRPM}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: journeyInstance, field: 'topSpeed', 'error')} required">
+	<label for="topSpeed">
+		<g:message code="journey.topSpeed.label" default="Top Speed" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="topSpeed" type="number" value="${journeyInstance.topSpeed}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: journeyInstance, field: 'topRPM', 'error')} required">
+	<label for="topRPM">
+		<g:message code="journey.topRPM.label" default="Top RPM" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:field name="topRPM" type="number" value="${journeyInstance.topRPM}" required=""/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: journeyInstance, field: 'endTime', 'error')} required">
+	<label for="endTime">
+		<g:message code="journey.endTime.label" default="End Time" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:datePicker name="endTime" precision="day"  value="${journeyInstance?.endTime}"  />
 
 </div>
 

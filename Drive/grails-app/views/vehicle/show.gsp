@@ -185,6 +185,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${vehicleInstance?.vehicleClass}">
+				<li class="fieldcontain">
+					<span id="vehicleClass-label" class="property-label"><g:message code="vehicle.vehicleClass.label" default="Vehicle Class" /></span>
+					
+						<span class="property-value" aria-labelledby="vehicleClass-label"><g:fieldValue bean="${vehicleInstance}" field="vehicleClass"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${vehicleInstance?.numberOfSpeeds}">
 				<li class="fieldcontain">
 					<span id="numberOfSpeeds-label" class="property-label"><g:message code="vehicle.numberOfSpeeds.label" default="Number Of Speeds" /></span>
@@ -238,7 +247,7 @@
 					
 				</li>
 				</g:if>
-
+			
 				<g:if test="${vehicleInstance?.colourNames}">
 				<li class="fieldcontain">
 					<span id="colourNames-label" class="property-label"><g:message code="vehicle.colourNames.label" default="Colour Names" /></span>

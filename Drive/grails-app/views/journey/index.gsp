@@ -24,15 +24,17 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="endTime" title="${message(code: 'journey.endTime.label', default: 'End Time')}" />
+						<g:sortableColumn property="journeyTimeLength" title="${message(code: 'journey.journeyTimeLength.label', default: 'Journey Time Length')}" />
 					
 						<g:sortableColumn property="heavyAccelerationCount" title="${message(code: 'journey.heavyAccelerationCount.label', default: 'Heavy Acceleration Count')}" />
 					
 						<g:sortableColumn property="heavyBrakingCount" title="${message(code: 'journey.heavyBrakingCount.label', default: 'Heavy Braking Count')}" />
 					
-						<g:sortableColumn property="startTime" title="${message(code: 'journey.startTime.label', default: 'Start Time')}" />
+						<g:sortableColumn property="averageSpeed" title="${message(code: 'journey.averageSpeed.label', default: 'Average Speed')}" />
 					
-						<th><g:message code="journey.vehicle.label" default="Vehicle" /></th>
+						<g:sortableColumn property="averageRPM" title="${message(code: 'journey.averageRPM.label', default: 'Average RPM')}" />
+					
+						<g:sortableColumn property="topSpeed" title="${message(code: 'journey.topSpeed.label', default: 'Top Speed')}" />
 					
 					</tr>
 				</thead>
@@ -40,15 +42,17 @@
 				<g:each in="${journeyInstanceList}" status="i" var="journeyInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${journeyInstance.id}">${fieldValue(bean: journeyInstance, field: "endTime")}</g:link></td>
+						<td><g:link action="show" id="${journeyInstance.id}">${fieldValue(bean: journeyInstance, field: "journeyTimeLength")}</g:link></td>
 					
 						<td>${fieldValue(bean: journeyInstance, field: "heavyAccelerationCount")}</td>
 					
 						<td>${fieldValue(bean: journeyInstance, field: "heavyBrakingCount")}</td>
 					
-						<td><g:formatDate date="${journeyInstance.startTime}" /></td>
+						<td>${fieldValue(bean: journeyInstance, field: "averageSpeed")}</td>
 					
-						<td>${fieldValue(bean: journeyInstance, field: "vehicle")}</td>
+						<td>${fieldValue(bean: journeyInstance, field: "averageRPM")}</td>
+					
+						<td>${fieldValue(bean: journeyInstance, field: "topSpeed")}</td>
 					
 					</tr>
 				</g:each>

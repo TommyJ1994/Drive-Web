@@ -125,15 +125,18 @@ class ApiController {
 	
 	/**
 	 * Receives journey data from the phone and adds it to the database 
-	 * after the data manipulation has been carried out
+	 * after the data manipulation has been carried out by the journey data manipulation service.
+	 * Statistics are also generated using the statistics generator service.
  	*/
 	@Transactional
 	def addNewJourney(String dataFromPhone)
 	{
 		def data = request.JSON
 		
+		// The ID of vehicle to which the journey data belongs
 		def vehicle = Vehicle.findByIdentifier(data.vehicleID);
 		
+		// create new groovy date for the journey starting time using date data from the phone
 		def startTime = new Date().copyWith(
 		    year: data.startTime.year, 
 		    month: data.startTime.month, 
@@ -142,6 +145,7 @@ class ApiController {
 		    minute: data.startTime.minute,
 		    second: data.startTime.second)
 		
+		// create new groovy date for the journey end time using date data from the phone
 		def endTime = new Date().copyWith(
 			year: data.endTime.year,
 			month: data.endTime.month,
@@ -150,8 +154,9 @@ class ApiController {
 			minute: data.endTime.minute,
 			second: data.endTime.second)
 		
-		def journeyTimeLength = 0;
+		def journeyTimeLength = (endTime.getTime()-startTime.getTime())/1000;
 		
+		// The raw list of hex values from the car sensors
 		def journeyData = data.journeyData;
 		
 		// Send the data to be processed by the manipulation service

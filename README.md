@@ -17,7 +17,13 @@ This README would normally document whatever steps are necessary to get your app
 * How to run tests
  
 ### Deployment instructions ###
-fergg
+* To run the unsigned mobile app, enable installation of apps from unknown sources from your android settings menu.
+* To run the grails web application, go to the drive directory and run the command below 
+```
+#!python
+grails run-app
+```
+
 
 ### Contribution guidelines ###
 

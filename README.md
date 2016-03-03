@@ -19,10 +19,32 @@
 * Grails Configuration - Uses version 2.4.4
 
 * Mongo Configuration - Uses version 2.4.9
+
+### Build instructions ###
+
+* To build the mobile app - run the following
+
+
+```
+#!python
+
+ioni build android
+```
+
  
 ### Deployment instructions ###
 
 * To run the unsigned mobile app, enable installation of apps from unknown sources from your android settings menu.
+
+ To run the mobile app on linux, use the following command
+
+
+```
+#!python
+
+ionic serve -l
+```
+
 
 * To run the grails web application, go to the drive directory and run the command below 
 ```

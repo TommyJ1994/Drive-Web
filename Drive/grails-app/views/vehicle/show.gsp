@@ -1,28 +1,186 @@
 
-<%@ page import="drive.Vehicle" %>
+<%@ page import="drive.Vehicle"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'vehicle.label', default: 'Vehicle')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<a href="#show-vehicle" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-		<div id="show-vehicle" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<ol class="property-list vehicle">
-			
+<head>
+<meta name="layout" content="main">
+<g:set var="entityName"
+	value="${message(code: 'manufacturers.label', default: 'Manufacturers')}" />
+<title></title>
+</head>
+<body>
+
+	<div id="list-vehicle" class="content scaffold-list" role="main">
+
+		<g:if test="${flash.message}">
+			<div class="message" role="status">
+				${flash.message}
+			</div>
+		</g:if>
+
+############# USE SEMANTIC LABELS EXTENSIVELY ON THIS PAGE ############ 
+DO A WIDE ITEM SECTION FOR EACH CAR COMPNENT, SPECS - ACCORDIAN FOR GRAPHS, OR VICE VERSA?
+
+		<div class="ui segment">
+			<div class="ui left rail animated slideInLeft">
+				<div class="ui segment">
+					<div class="ui image">
+						<asset:image
+							src="manufacturer-logos/${vehicleInstanceList?.make[0]}.png"
+							class="ui medium bordered image" />
+					</div>
+					</br> </br>
+					<div class="content">
+						<h3>
+							${vehicleInstanceList?.make[0]}
+						</h3>
+						<div class="description">
+							${new File("grails-app/assets/descriptions/${vehicleInstanceList?.make[0]}.txt").getText('UTF-8')}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="ui right rail animated slideInRight">
+				<div class="ui segment">
+
+					<div class="ui horizontal statistics">
+						<h2>
+							${vehicleInstanceList?.make[0]}
+							Statistics
+						</h2>
+						<div class="green statistic">
+							<div class="value">27</div>
+							<div class="label">Vehicles</div>
+						</div>
+						<div class="green statistic">
+							<div class="value">8</div>
+							<div class="label">Models</div>
+						</div>
+						<div class="green statistic">
+							<div class="value">28</div>
+							<div class="label">Journeys</div>
+						</div>
+						<div class="green statistic">
+							<div class="value">28</div>
+							<div class="label">Average Age</div>
+						</div>
+						<div class="green statistic">
+							<div class="value">7</div>
+							<div class="label">Hours</div>
+						</div>
+						<div class="orange statistic">
+							<div class="value">7</div>
+							<div class="label">Average Speed</div>
+						</div>
+						<div class="orange statistic">
+							<div class="value">7</div>
+							<div class="label">Average RPM</div>
+						</div>
+						<div class="red statistic">
+							<div class="value">7</div>
+							<div class="label">Heavy Braking</div>
+						</div>
+						<div class="red statistic">
+							<div class="value">7</div>
+							<div class="label">Heavy Acceleration</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="ui fluid image">
+				<img
+					src="https://www.amcharts.com/wp-content/uploads/2015/07/static_demo_392.jpg">
+			</div>
+
+			most popular country, gender pie chart, average age. </br> </br>
+			<g:each in="${vehicleInstanceList}" status="i" var="vehicleInstance">
+				<div style="width: 100%; padding: 20px">
+
+					<div class="item">
+						<div class="middle aligned content">
+							<div class="ui header">
+
+								<h2>
+									<div class="ui image">
+										<asset:image
+											src="manufacturer-logos/${vehicleInstance?.make}.png"
+											class="ui avatar image" />
+									</div>
+									${vehicleInstance?.year}
+									${vehicleInstance?.model}
+								</h2>
+							</div>
+
+							<div class="description">
+
+								<div class="ui equal width grid">
+									<div class="column">
+
+										<div class="ui card">
+											<div class="content">
+												<div class="ui green ribbon label">
+													<i class="user icon"></i> Driver
+												</div>
+												<div class="description">
+													Aged
+													${vehicleInstance?.driver?.dateOfBirth}
+												</div>
+												<div class="description">
+													${vehicleInstance?.driver?.gender}
+												</div>
+
+												<div class="description">
+													${vehicleInstance?.driver?.country}
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="column">
+
+										<div class="ui card">
+											<div class="content">
+												<div class="ui red ribbon label">
+													<i class="car icon"></i> Vehicle
+												</div>
+												<div class="description">
+													${vehicleInstance?.engineSize}L Engine
+												</div>
+												<div class="description">
+													${vehicleInstance?.transmissionType}
+												</div>
+
+												<div class="description">
+													${vehicleInstance?.vehicleStyle}
+												</div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="column">
+
+										<div class="ui card">
+											<div class="content">
+												<div class="ui blue ribbon label">
+													<i class="line chart icon"></i> Statistics
+												</div>
+												<div class="description">Heavy Acceleration</div>
+												<div class="description">Heavy Braking</div>
+
+												<div class="description">Average Speed</div>
+											</div>
+										</div>
+
+									</div>
+
+								</div>
+
+
+							</div>
+
 				<g:if test="${vehicleInstance?.identifier}">
 				<li class="fieldcontain">
 					<span id="identifier-label" class="property-label"><g:message code="vehicle.identifier.label" default="Identifier" /></span>
@@ -285,14 +443,36 @@
 					
 				</li>
 				</g:if>
-			
-			</ol>
-			<g:form url="[resource:vehicleInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${vehicleInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
+
+							</br>
+							<div class="extra">
+							<g:link action="show" id="${vehicleInstance?.id}" class="ui right floated black button">View Vehicle
+									Data</g:link>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				</br>
+			</g:each>
 		</div>
-	</body>
+
+
+
+
+
+	</div>
+</body>
 </html>
+
+
+
+
+
+
+
+			
+
+			
+			

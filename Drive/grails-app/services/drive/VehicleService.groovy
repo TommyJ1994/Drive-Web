@@ -14,14 +14,25 @@ class VehicleService {
 	 */
 	def generateUniqueID()
 	{
-		char[] chars = "abcdefghijklmnopqrstuvwxyzABCEDFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
+		boolean globallyUniqueID = false
 		StringBuilder stringBuilder = new StringBuilder();
 		
-		Random random = new Random();
-		
-		for (int i = 0; i < 10; i++) {
-			char character = chars[random.nextInt(chars.length)];
-			stringBuilder.append(character);
+		while(globallyUniqueID == false)
+		{
+			char[] chars = "abcdefghijklmnopqrstuvwxyzABCEDFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
+			
+			Random random = new Random();
+			
+			for (int i = 0; i < 10; i++) {
+				char character = chars[random.nextInt(chars.length)];
+				stringBuilder.append(character);
+			}
+			
+			if(Vehicle.findByIdentifier(stringBuilder.toString()) == null)
+			{
+				globallyUniqueID = true;
+			}
+			
 		}
 		return stringBuilder.toString();
 	}

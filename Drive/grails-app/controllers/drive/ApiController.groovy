@@ -3,6 +3,7 @@ package drive
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 import groovy.json.JsonSlurper
+
 import java.text.SimpleDateFormat
 
 /**
@@ -20,15 +21,15 @@ class ApiController {
     static responseFormats = ['json', 'xml']
 	
 	// Allowed Methods to Interact with Resources
-    static allowedMethods = [addNewJourney: "POST", addNewVehicle: "POST", delete: "DELETE"]
+    static allowedMethods = [getVehicleInfo: "POST", addNewJourney: "POST", addNewVehicle: "POST", delete: "DELETE"]
 
 	/**
-	 * 
-	 * @param max - the maximum number of items to return
+	 * This method will return related data for a particular car
+	 * @param vehicleID - the vehicle id of the car
  	*/
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Api.list(params), [status: OK]
+    def getVehicleInfo(String vehicleID) {
+		def data = request.JSON
+        respond Vehicle.findByIdentifier(data.id)
     }
 		
 	/**
@@ -44,7 +45,7 @@ class ApiController {
 		// Picking out Driver information and car data
 		def dateOfBirth = data.dateOfBirth;
 		def gender = data.gender;
-		def country = data.country;
+		def country = data.country.toLowerCase();
 		def carData = data.carData
 		
 		// Generate a new ID for the vehicle. This ID will be globally unique.

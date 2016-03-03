@@ -24,67 +24,67 @@
 
 tom@Mint17 /media/sf_Semester_8/Project/open-car-network-mobile/www $ tree
 .
-├── css
-│   └── style.css
-├── img
-├── index.html
-├── js
-│   ├── addVehiclesController.js
-│   ├── app.js
-│   ├── countryChooserController.js
-│   ├── dashboardController.js
-│   ├── dateOfBirthChooserController.js
-│   ├── followingController.js
-│   ├── genderChooserController.js
-│   ├── menuController.js
-│   ├── obdConnectionController.js
-│   ├── sensorQueryingController.js
-│   ├── services
-│   │   ├── BluetoothService.js
-│   │   └── StorageService.js
-│   ├── settingsController.js
-│   └── vehiclesController.js
-├── lib
-│   ├── angular
-│   ├── angular-animate
-│   ├── angular-sanitize
-│   ├── angular-ui-router
-│   ├── ionic
-│   │   ├── bower.json
-│   │   ├── css
-│   │   │   ├── ionic.css
-│   │   │   ├── ionic.css.orig
-│   │   │   └── ionic.min.css
-│   │   ├── fonts
-│   │   ├── js
-│   │   │   ├── ionic-angular.js
-│   │   │   ├── ionic-angular.min.js
-│   │   │   ├── ionic.bundle.js
-│   │   │   ├── ionic.bundle.min.js
-│   │   │   ├── ionic.js
-│   │   │   ├── ionic.min.js
-│   │   │   └── ng-cordova.js
-│   │   ├── README.md
-│   │   └── scss
-│   └── ionic-datepicker
-│      
-└── templates
-    ├── addVehicleMake.html
-    ├── addVehicleModel.html
-    ├── addVehicleStyle.html
-    ├── addVehicleYear.html
-    ├── countryChooser.html
-    ├── dashboard.html
-    ├── dateOfBirthChooser.html
-    ├── finalVehicle.html
-    ├── following.html
-    ├── genderChooser.html
-    ├── menu.html
-    ├── obdConnection.html
-    ├── sensorQuerying.html
-    ├── settings.html
-    ├── setup.html
-    └── vehicles.html
+* ├── css
+* │   └── style.css
+* ├── img
+* ├── index.html
+* ├── js
+* │   ├── addVehiclesController.js
+* │   ├── app.js
+* │   ├── countryChooserController.js
+* │   ├── dashboardController.js
+* │   ├── dateOfBirthChooserController.js
+* │   ├── followingController.js
+* │   ├── genderChooserController.js
+* │   ├── menuController.js
+* │   ├── obdConnectionController.js
+* │   ├── sensorQueryingController.js
+* │   ├── services
+* │   │   ├── BluetoothService.js
+* │   │   └── StorageService.js
+* │   ├── settingsController.js
+* │   └── vehiclesController.js
+* ├── lib
+* │   ├── angular
+* │   ├── angular-animate
+* │   ├── angular-sanitize
+* │   ├── angular-ui-router
+* │   ├── ionic
+* │   │   ├── bower.json
+* │   │   ├── css
+* │   │   │   ├── ionic.css
+* │   │   │   ├── ionic.css.orig
+* │   │   │   └── ionic.min.css
+* │   │   ├── fonts
+* │   │   ├── js
+* │   │   │   ├── ionic-angular.js
+* │   │   │   ├── ionic-angular.min.js
+* │   │   │   ├── ionic.bundle.js
+* │   │   │   ├── ionic.bundle.min.js
+* │   │   │   ├── ionic.js
+* │   │   │   ├── ionic.min.js
+* │   │   │   └── ng-cordova.js
+* │   │   ├── README.md
+* │   │   └── scss
+* │   └── ionic-datepicker
+* │      
+* └── templates
+*     ├── addVehicleMake.html
+*     ├── addVehicleModel.html
+*     ├── addVehicleStyle.html
+*     ├── addVehicleYear.html
+*     ├── countryChooser.html
+*     ├── dashboard.html
+*     ├── dateOfBirthChooser.html
+*     ├── finalVehicle.html
+*     ├── following.html
+*     ├── genderChooser.html
+*     ├── menu.html
+*     ├── obdConnection.html
+*     ├── sensorQuerying.html
+*     ├── settings.html
+*     ├── setup.html
+*     └── vehicles.html
 
  
 ### Deployment instructions ###

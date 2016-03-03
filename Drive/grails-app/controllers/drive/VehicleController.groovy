@@ -8,97 +8,144 @@ import grails.transaction.Transactional
 
 class VehicleController {
 
-    static allowedMethods = [create: "POST", save: "POST", update: "PUT", delete: "DELETE"]
+	static allowedMethods = [create: "POST", save: "POST", update: "PUT", delete: "DELETE"]
 
-    def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        respond Vehicle.list(params), model:[vehicleInstanceCount: Vehicle.count()]
-    }
+	def index(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		respond Vehicle.list(params), model:[vehicleInstanceCount: Vehicle.count()]
+	}
 
-    def show(Vehicle vehicleInstance) {
-        respond vehicleInstance
-    }
+	def manufacturers() {
+		def criteria = Vehicle.createCriteria()
+		def vehicleInstanceList = criteria.list {
+		    projections {
+		        distinct('make')
+		    }
+			order('make', 'desc')
+		}
+		return [makes: vehicleInstanceList]
+	}
 
-    def create() {
-        respond new Vehicle(params)
-    }
+	def manufacturer(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		def criteria = Vehicle.createCriteria()
+		def vehicleInstanceList = criteria.list(params) {
+		    projections {
+		        eq("make", params.id)
+		    }
+			order('model', 'desc')
+		}
+		
+		def manufacturerStats = criteria.list() {
+			projections {
+				eq("make", params.id)
+			}
+		}
+		
+		def vehicleCount = manufacturerStats.size()
+		//def modelCount = manufacturerStats()
+		
+		respond vehicleInstanceList, model:[vehicleInstanceCount: Vehicle.count(), 
+			make: vehicleInstanceList[0].make,
+			vehicleCount: vehicleCount]
+	}
 
-    @Transactional
-    def save(Vehicle vehicleInstance) {
-        if (vehicleInstance == null) {
-            notFound()
-            return
-        }
+	def show(Vehicle vehicleInstance) {
+		respond vehicleInstance
+	}
 
-        if (vehicleInstance.hasErrors()) {
-            respond vehicleInstance.errors, view:'create'
-            return
-        }
+	def create() {
+		respond new Vehicle(params)
+	}
 
-        vehicleInstance.save flush:true
+	@Transactional
+	def save(Vehicle vehicleInstance) {
+		if (vehicleInstance == null) {
+			notFound()
+			return
+		}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'vehicle.label', default: 'Vehicle'), vehicleInstance.id])
-                redirect vehicleInstance
-            }
-            '*' { respond vehicleInstance, [status: CREATED] }
-        }
-    }
+		if (vehicleInstance.hasErrors()) {
+			respond vehicleInstance.errors, view:'create'
+			return
+		}
 
-    def edit(Vehicle vehicleInstance) {
-        respond vehicleInstance
-    }
+		vehicleInstance.save flush:true
 
-    @Transactional
-    def update(Vehicle vehicleInstance) {
-        if (vehicleInstance == null) {
-            notFound()
-            return
-        }
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.created.message', args: [
+					message(code: 'vehicle.label', default: 'Vehicle'),
+					vehicleInstance.id
+				])
+				redirect vehicleInstance
+			}
+			'*' { respond vehicleInstance, [status: CREATED] }
+		}
+	}
 
-        if (vehicleInstance.hasErrors()) {
-            respond vehicleInstance.errors, view:'edit'
-            return
-        }
+	def edit(Vehicle vehicleInstance) {
+		respond vehicleInstance
+	}
 
-        vehicleInstance.save flush:true
+	@Transactional
+	def update(Vehicle vehicleInstance) {
+		if (vehicleInstance == null) {
+			notFound()
+			return
+		}
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Vehicle.label', default: 'Vehicle'), vehicleInstance.id])
-                redirect vehicleInstance
-            }
-            '*'{ respond vehicleInstance, [status: OK] }
-        }
-    }
+		if (vehicleInstance.hasErrors()) {
+			respond vehicleInstance.errors, view:'edit'
+			return
+		}
 
-    @Transactional
-    def delete(Vehicle vehicleInstance) {
+		vehicleInstance.save flush:true
 
-        if (vehicleInstance == null) {
-            notFound()
-            return
-        }
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.updated.message', args: [
+					message(code: 'Vehicle.label', default: 'Vehicle'),
+					vehicleInstance.id
+				])
+				redirect vehicleInstance
+			}
+			'*'{ respond vehicleInstance, [status: OK] }
+		}
+	}
 
-        vehicleInstance.delete flush:true
+	@Transactional
+	def delete(Vehicle vehicleInstance) {
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'Vehicle.label', default: 'Vehicle'), vehicleInstance.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
-        }
-    }
+		if (vehicleInstance == null) {
+			notFound()
+			return
+		}
 
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'vehicle.label', default: 'Vehicle'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
+		vehicleInstance.delete flush:true
+
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.deleted.message', args: [
+					message(code: 'Vehicle.label', default: 'Vehicle'),
+					vehicleInstance.id
+				])
+				redirect action:"index", method:"GET"
+			}
+			'*'{ render status: NO_CONTENT }
+		}
+	}
+
+	protected void notFound() {
+		request.withFormat {
+			form multipartForm {
+				flash.message = message(code: 'default.not.found.message', args: [
+					message(code: 'vehicle.label', default: 'Vehicle'),
+					params.id
+				])
+				redirect action: "index", method: "GET"
+			}
+			'*'{ render status: NOT_FOUND }
+		}
+	}
 }

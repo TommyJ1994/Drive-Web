@@ -10,11 +10,13 @@ class VehicleController {
 
 	static allowedMethods = [create: "POST", save: "POST", update: "PUT", delete: "DELETE"]
 
+
 	def index(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
 		respond Vehicle.list(params), model:[vehicleInstanceCount: Vehicle.count()]
 	}
 
+	
 	def manufacturers() {
 		def criteria = Vehicle.createCriteria()
 		def vehicleInstanceList = criteria.list {
@@ -26,6 +28,11 @@ class VehicleController {
 		return [makes: vehicleInstanceList]
 	}
 
+	/**
+	 * This method returns data about a specific make of car - ie. Audi.
+	 * @param max - The max number of results return to the view.
+	 * @param id - The make of car to fetch the data for.
+	 */
 	def manufacturer(Integer max) {
 		params.max = Math.min(max ?: 10, 100)
 		def criteria = Vehicle.createCriteria()
@@ -36,18 +43,36 @@ class VehicleController {
 			order('model', 'desc')
 		}
 		
+		def vehicleInstanceCount = criteria.list() {
+			projections {
+				eq("make", params.id)
+			}
+		}
+		
 		def manufacturerStats = criteria.list() {
 			projections {
 				eq("make", params.id)
 			}
 		}
 		
+		// Get the number of vehicles of the make
 		def vehicleCount = manufacturerStats.size()
-		//def modelCount = manufacturerStats()
 		
-		respond vehicleInstanceList, model:[vehicleInstanceCount: Vehicle.count(), 
+		// Get the number of models of a make
+		def modelCount = manufacturerStats.model as Set
+		
+		// Get the number of models of a make
+		def journeyCount = manufacturerStats.journeys as Set
+		
+		// Get the average vehicle age
+		def vehicleAgeAverage = manufacturerStats.year.sum() / manufacturerStats.year.size()
+		
+		respond vehicleInstanceList, model:[vehicleInstanceCount: vehicleInstanceCount.size(), 
 			make: vehicleInstanceList[0].make,
-			vehicleCount: vehicleCount]
+			vehicleCount: vehicleCount,
+			modelCount: modelCount.size(),
+			journeyCount: journeyCount.size() - 1,
+			vehicleAgeAverage: vehicleAgeAverage]
 	}
 
 	def show(Vehicle vehicleInstance) {

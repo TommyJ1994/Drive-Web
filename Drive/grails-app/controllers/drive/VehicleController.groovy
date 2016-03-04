@@ -8,7 +8,7 @@ import grails.transaction.Transactional
 
 class VehicleController {
 
-	static allowedMethods = [create: "POST", save: "POST", update: "PUT", delete: "DELETE"]
+	static allowedMethods = [create: "POST", save: "POST", delete: "DELETE"]
 
 
 	def index(Integer max) {
@@ -16,7 +16,9 @@ class VehicleController {
 		respond Vehicle.list(params), model:[vehicleInstanceCount: Vehicle.count()]
 	}
 
-	
+	/**
+	* This method returns data for all manufacturers.
+	*/
 	def manufacturers() {
 		def criteria = Vehicle.createCriteria()
 		def vehicleInstanceList = criteria.list {
@@ -79,65 +81,6 @@ class VehicleController {
 		respond vehicleInstance
 	}
 
-	def create() {
-		respond new Vehicle(params)
-	}
-
-	@Transactional
-	def save(Vehicle vehicleInstance) {
-		if (vehicleInstance == null) {
-			notFound()
-			return
-		}
-
-		if (vehicleInstance.hasErrors()) {
-			respond vehicleInstance.errors, view:'create'
-			return
-		}
-
-		vehicleInstance.save flush:true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.created.message', args: [
-					message(code: 'vehicle.label', default: 'Vehicle'),
-					vehicleInstance.id
-				])
-				redirect vehicleInstance
-			}
-			'*' { respond vehicleInstance, [status: CREATED] }
-		}
-	}
-
-	def edit(Vehicle vehicleInstance) {
-		respond vehicleInstance
-	}
-
-	@Transactional
-	def update(Vehicle vehicleInstance) {
-		if (vehicleInstance == null) {
-			notFound()
-			return
-		}
-
-		if (vehicleInstance.hasErrors()) {
-			respond vehicleInstance.errors, view:'edit'
-			return
-		}
-
-		vehicleInstance.save flush:true
-
-		request.withFormat {
-			form multipartForm {
-				flash.message = message(code: 'default.updated.message', args: [
-					message(code: 'Vehicle.label', default: 'Vehicle'),
-					vehicleInstance.id
-				])
-				redirect vehicleInstance
-			}
-			'*'{ respond vehicleInstance, [status: OK] }
-		}
-	}
 
 	@Transactional
 	def delete(Vehicle vehicleInstance) {

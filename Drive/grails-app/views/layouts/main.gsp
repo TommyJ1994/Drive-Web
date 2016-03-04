@@ -24,7 +24,9 @@
 <asset:javascript src="uvcharts.min.js" />
 <g:layoutHead />
 </head>
-<body>
+<body class="animated fadeIn" style="background: linear-gradient(180deg, #1A1C1D, #fff); height: 100%;margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;">
 	<div class="ui inverted primary menu">
 		<div class="item">
 			<asset:image src="logo-white-small.png" alt="Grails" />
@@ -62,16 +64,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="ui container">
+	<div class="ui container responsive">
 		<g:layoutBody />
 		</br>
 		</br>
-	</div>
+	
 	<div align="center" class="footer ui container" role="contentinfo">
 		<div align="center" class="item image ui micro small">
 			<asset:image src="logo-big.png" alt="Grails" />
 			<h6>Drive - The Open Car Network</h6>
 		</div>
+	</div>
 	</div>
 </body>
 </html>

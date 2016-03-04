@@ -4,6 +4,7 @@ class Vehicle {
 	
 	String identifier
 	Driver driver
+	OverallStatistics overallStatistics
 	static hasMany = [journeys : Journey, features : String, colourNames : String, colourCodes : String]
 	
 	String make, model, engineConfiguration, fuelType, manufacturerEngineCode, drivenWheels, transmissionType, vehicleStyle, vehicleClass, numberOfSpeeds
@@ -12,6 +13,7 @@ class Vehicle {
 	
     static constraints = {
 		identifier blank:false
+		overallStatistics blank:false
 		driver blank:false
 		make blank:false
 		model blank:false

@@ -11,24 +11,41 @@ class Journey {
 	Date startTime
 	Date endTime
 	
-	Integer journeyTimeLength // in minutes
-	
-	Integer heavyAccelerationCount
-	Integer heavyBrakingCount
-	
-	Integer averageSpeed
-	Integer averageRPM
-
+	Integer journeyTimeLength
 	Integer topSpeed
 	Integer topRPM
+	Integer averageSpeed
+	Integer averageRPM
+	Integer averagePercentageHighRPM
+	Integer averageMPG
+	Integer averageEngineLoad
+	Integer averageThrottlePosition
+	Integer averagePercentageIdle
+	Integer heavyAccelerationCount
+	Integer heavyBrakingCount
+	Integer averageAmbientAirTemperature
+	Integer averageG
+	Integer topAccelerationGforce
+	Integer topDecelerationGforce
+	Integer averagePercentageCoasting
 	
     static constraints = {
-		journeyTimeLength(nullable:false)
-		heavyAccelerationCount(nullable:false)
-		heavyBrakingCount(nullable:false)
-		averageSpeed(nullable:false)
-		averageRPM(nullable:false)
-		topSpeed(nullable:false)
-		topRPM(nullable:false)
+		journeyTimeLength(nullable:true)
+		heavyAccelerationCount(nullable:true)
+		heavyBrakingCount(nullable:true)
+		averageSpeed(nullable:true)
+		averageRPM(nullable:true)
+		topSpeed(nullable:true)
+		topRPM(nullable:true)
+		averageAmbientAirTemperature(nullable:true)
+		averageG(nullable:true)
+		averagePercentageCoasting(nullable:true)
+		averagePercentageIdle(nullable:true)
+		averageThrottlePosition(nullable:true)
+		averageEngineLoad(nullable:true)
+		averageMPG(nullable:true)
+		averagePercentageHighRPM(nullable:true)
+		topDecelerationGforce(nullable:true)
+		topDecelerationGforce(nullable:true)
     }
 }

@@ -24,7 +24,7 @@ class Journey {
 	Integer heavyAccelerationCount
 	Integer heavyBrakingCount
 	Integer averageAmbientAirTemperature
-	Integer averageG
+	Integer averageGForce
 	Integer topAccelerationGforce
 	Integer topDecelerationGforce
 	Integer averagePercentageCoasting
@@ -38,7 +38,7 @@ class Journey {
 		topSpeed(nullable:true)
 		topRPM(nullable:true)
 		averageAmbientAirTemperature(nullable:true)
-		averageG(nullable:true)
+		averageGForce(nullable:true)
 		averagePercentageCoasting(nullable:true)
 		averagePercentageIdle(nullable:true)
 		averageThrottlePosition(nullable:true)

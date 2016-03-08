@@ -5,7 +5,6 @@ import grails.transaction.Transactional
  * This service will convert the data from a hex format to a human readable / true value format.
  */
 
-
 @Transactional
 class JourneyDataManipulationService {
 
@@ -42,7 +41,6 @@ class JourneyDataManipulationService {
 	def actualEngineTorque = [];
 	def engineReferenceTorque = [];
 
-
 	// statistics fields
 	def topSpeed = 0
 	def topRPM = 0
@@ -69,81 +67,79 @@ class JourneyDataManipulationService {
 	def mpgSamples = 0
 	def throttleSamples = 0
 
-
 	/**
 	 * This method will receive the journey data from the API controller
 	 */
 	def process(def data) {
 
 		// sort the list of points into their sensor list
-
 		for(int i = 0; i < data.size(); i++)
 		{
 			sort(data[i])
 		}
-
+		
 		// Convert the hex based data list of each sensor into its true decimal form
 
-		calculatedEngineLoad = decodeCalculatedEngineLoadPoints(calculatedEngineLoad)
-		engineCoolantTemperature = decodeEngineCoolantTemperature(engineCoolantTemperature)
-		fuelPressure = decodeFuelPressure(fuelPressure)
-		intakeManifoldAbsolutePressure = decodeIntakeManifoldAbsolutePressure(intakeManifoldAbsolutePressure)
-		engineRPM = decodeEngineRPM(engineRPM)
-		vehicleSpeed = decodeVehicleSpeed(vehicleSpeed)
-		intakeAirTemperature = decodeIntakeAirTemperature(intakeAirTemperature)
-		mafAirFlowRate = decodeMafAirFlowRate(mafAirFlowRate)
-		throttlePosition = decodeThrottlePosition(throttlePosition)
-		oxygenSensorVoltage1 = decodeOxygenSensorVoltage1(oxygenSensorVoltage1)
-		oxygenSensorVoltage2 = decodeOxygenSensorVoltage2(oxygenSensorVoltage2)
-		barometricPressure = decodeBarometricPressure(barometricPressure)
-		catalystTemperatureBank1Sensor1 = decodeCatalystTemperatureBank1Sensor1(catalystTemperatureBank1Sensor1)
-		catalystTemperatureBank2Sensor1 = decodeCatalystTemperatureBank2Sensor1(catalystTemperatureBank2Sensor1)
-		catalystTemperatureBank1Sensor2 = decodeCatalystTemperatureBank1Sensor2(catalystTemperatureBank1Sensor2)
-		catalystTemperatureBank2Sensor2 = decodeCatalystTemperatureBank2Sensor2(catalystTemperatureBank2Sensor2)
-		absoluteloadValue = decodeAbsoluteloadValue(absoluteloadValue)
-		relativeThrottlePosition = decodeRelativeThrottlePosition(relativeThrottlePosition)
-		ambientAirTemperature = decodeAmbientAirTemperature(ambientAirTemperature)
-		commandedThrottleActuator = decodeCommandedThrottleActuator(commandedThrottleActuator)
-		relativeAcceleratorPedalPosition = decodeRelativeAcceleratorPedalPosition(relativeAcceleratorPedalPosition)
-		engineOilTemperature = decodeEngineOilTemperature(engineOilTemperature)
-		fuelInjectionTiming = decodeFuelInjectionTiming(fuelInjectionTiming)
-		engineFuelRate = decodeEngineFuelRate(engineFuelRate)
-		driversDemandEngineTorque = decodeDriversDemandEngineTorque(driversDemandEngineTorque)
-		actualEngineTorque = decodeActualEngineTorque(actualEngineTorque)
-		engineReferenceTorque = decodeEngineReferenceTorque(engineReferenceTorque)
+		def calculatedEngineLoadDecoded = decodeCalculatedEngineLoadPoints(calculatedEngineLoad)
+		def engineCoolantTemperatureDecoded = decodeEngineCoolantTemperature(engineCoolantTemperature)
+		def fuelPressureDecoded = decodeFuelPressure(fuelPressure)
+		def intakeManifoldAbsolutePressureDecoded = decodeIntakeManifoldAbsolutePressure(intakeManifoldAbsolutePressure)
+		def engineRPMDecoded = decodeEngineRPM(engineRPM)
+		def vehicleSpeedDecoded = decodeVehicleSpeed(vehicleSpeed)
+		def intakeAirTemperatureDecoded = decodeIntakeAirTemperature(intakeAirTemperature)
+		def mafAirFlowRateDecoded = decodeMafAirFlowRate(mafAirFlowRate)
+		def throttlePositionDecoded = decodeThrottlePosition(throttlePosition)
+		def oxygenSensorVoltage1Decoded = decodeOxygenSensorVoltage1(oxygenSensorVoltage1)
+		def oxygenSensorVoltage2Decoded = decodeOxygenSensorVoltage2(oxygenSensorVoltage2)
+		def barometricPressureDecoded = decodeBarometricPressure(barometricPressure)
+		def catalystTemperatureBank1Sensor1Decoded = decodeCatalystTemperatureBank1Sensor1(catalystTemperatureBank1Sensor1)
+		def catalystTemperatureBank2Sensor1Decoded = decodeCatalystTemperatureBank2Sensor1(catalystTemperatureBank2Sensor1)
+		def catalystTemperatureBank1Sensor2Decoded = decodeCatalystTemperatureBank1Sensor2(catalystTemperatureBank1Sensor2)
+		def catalystTemperatureBank2Sensor2Decoded = decodeCatalystTemperatureBank2Sensor2(catalystTemperatureBank2Sensor2)
+		def absoluteloadValueDecoded = decodeAbsoluteloadValue(absoluteloadValue)
+		def relativeThrottlePositionDecoded = decodeRelativeThrottlePosition(relativeThrottlePosition)
+		def ambientAirTemperatureDecoded = decodeAmbientAirTemperature(ambientAirTemperature)
+		def commandedThrottleActuatorDecoded = decodeCommandedThrottleActuator(commandedThrottleActuator)
+		def relativeAcceleratorPedalPositionDecoded = decodeRelativeAcceleratorPedalPosition(relativeAcceleratorPedalPosition)
+		def engineOilTemperatureDecoded = decodeEngineOilTemperature(engineOilTemperature)
+		def fuelInjectionTimingDecoded = decodeFuelInjectionTiming(fuelInjectionTiming)
+		def engineFuelRateDecoded = decodeEngineFuelRate(engineFuelRate)
+		def driversDemandEngineTorqueDecoded = decodeDriversDemandEngineTorque(driversDemandEngineTorque)
+		def actualEngineTorqueDecoded = decodeActualEngineTorque(actualEngineTorque)
+		def engineReferenceTorqueDecoded = decodeEngineReferenceTorque(engineReferenceTorque)
 
 		// Generate statistics for the journey
-		calculateStatistics(vehicleSpeed, engineRPM)
+		calculateStatistics(vehicleSpeedDecoded, engineRPMDecoded, throttlePositionDecoded, calculatedEngineLoadDecoded, engineFuelRateDecoded)
 
 		// The list of all sensors.
 		def sensors = [
-			calculatedEngineLoad,
-			engineCoolantTemperature,
-			fuelPressure,
-			intakeManifoldAbsolutePressure,
-			engineRPM,
-			vehicleSpeed,
-			intakeAirTemperature,
-			mafAirFlowRate,
-			throttlePosition,
-			oxygenSensorVoltage1,
-			oxygenSensorVoltage2,
-			barometricPressure,
-			catalystTemperatureBank1Sensor1,
-			catalystTemperatureBank2Sensor1,
-			catalystTemperatureBank1Sensor2,
-			catalystTemperatureBank2Sensor2,
-			absoluteloadValue,
-			relativeThrottlePosition,
-			ambientAirTemperature,
-			commandedThrottleActuator,
-			relativeAcceleratorPedalPosition,
-			engineOilTemperature,
-			fuelInjectionTiming,
-			engineFuelRate,
-			driversDemandEngineTorque,
-			actualEngineTorque,
-			engineReferenceTorque
+			calculatedEngineLoadDecoded,
+			engineCoolantTemperatureDecoded,
+			fuelPressureDecoded,
+			intakeManifoldAbsolutePressureDecoded,
+			engineRPMDecoded,
+			vehicleSpeedDecoded,
+			intakeAirTemperatureDecoded,
+			mafAirFlowRateDecoded,
+			throttlePositionDecoded,
+			oxygenSensorVoltage1Decoded,
+			oxygenSensorVoltage2Decoded,
+			barometricPressureDecoded,
+			catalystTemperatureBank1Sensor1Decoded,
+			catalystTemperatureBank2Sensor1Decoded,
+			catalystTemperatureBank1Sensor2Decoded,
+			catalystTemperatureBank2Sensor2Decoded,
+			absoluteloadValueDecoded,
+			relativeThrottlePositionDecoded,
+			ambientAirTemperatureDecoded,
+			commandedThrottleActuatorDecoded,
+			relativeAcceleratorPedalPositionDecoded,
+			engineOilTemperatureDecoded,
+			fuelInjectionTimingDecoded,
+			engineFuelRateDecoded,
+			driversDemandEngineTorqueDecoded,
+			actualEngineTorqueDecoded,
+			engineReferenceTorqueDecoded
 		]
 
 		// The lists of all statistics + sampling sizes
@@ -171,11 +167,13 @@ class JourneyDataManipulationService {
 			mpgSamples,
 			throttleSamples
 		]
-
+		
+		
 		// return data to the controller for validation and storage in the database
 		return ["sensors": sensors, "statistics": statistics]
 	}
-
+	
+	
 	/**
 	 * Sort the sensors recorded journey data based on the hex identifier.
 	 * The scrambled data is sort into lists of points of the same sensor
@@ -230,7 +228,7 @@ class JourneyDataManipulationService {
 				oxygenSensorVoltage2 << point.substring(point.length() - 4)
 				break
 			// Barometric Pressure
-			case "4115":
+			case "4133":
 				barometricPressure << point.substring(point.length() - 2)
 				break
 			// Catalyst Temperature Bank 1 Sensor 1
@@ -266,7 +264,7 @@ class JourneyDataManipulationService {
 				commandedThrottleActuator << point.substring(point.length() - 2)
 				break
 			// Relative Accelerator Pedal Position
-			case "41":
+			case "415A":
 				relativeAcceleratorPedalPosition << point.substring(point.length() - 2)
 				break
 			// Engine Oil Temperature
@@ -321,7 +319,7 @@ class JourneyDataManipulationService {
 		return decodedList
 	}
 
-
+	
 	/**
 	 * Conversion for the engine coolant temperature.
 	 * This method will convert hex to a decoded decimal value and then into the true human readable sensor value.
@@ -804,7 +802,6 @@ class JourneyDataManipulationService {
 		return decodedList
 	}
 
-
 	/**
 	 * Conversion for the Fuel injection timing.
 	 * This method will convert hex to a decoded decimal value and then into the true human readable sensor value.
@@ -827,7 +824,6 @@ class JourneyDataManipulationService {
 		}
 		return decodedList
 	}
-
 
 	/**
 	 * Conversion for the Engine fuel rate.
@@ -925,10 +921,13 @@ class JourneyDataManipulationService {
 	 * This method will calculate statistics for the journey data
 	 * @param readableJourneyData - the journey data to draw statistics from.
 	 */
-	def calculateStatistics(def vehicleSpeedData, def engineRpmData)
+	def calculateStatistics(def vehicleSpeedData, def engineRpmData, def throttlePosition, def calculatedEngineLoad, def engineFuelRate)
 	{
 		if(vehicleSpeedData.size() > 0)
 		{
+			speedSamples = vehicleSpeedData.size()
+			idleSamples = vehicleSpeedData.size()
+			gForceSamples = vehicleSpeedData.size()
 			topSpeed = statisticsGeneratorService.getTopSpeed(vehicleSpeedData)
 			averageSpeed = statisticsGeneratorService.getAverageSpeed(vehicleSpeedData)
 			heavyBrakingCount = statisticsGeneratorService.getHeavyBrakingCount(vehicleSpeedData)
@@ -941,6 +940,7 @@ class JourneyDataManipulationService {
 
 		if(engineRpmData.size() > 0)
 		{
+			rpmSamples = engineRpmData.size()
 			topRPM = statisticsGeneratorService.getTopRPM(engineRpmData)
 			averageRPM = statisticsGeneratorService.getAverageRPM(engineRpmData)
 			averagePercentageHighRPM = statisticsGeneratorService.getAveragePercentageHighRPM(engineRpmData)
@@ -948,11 +948,13 @@ class JourneyDataManipulationService {
 
 		if(calculatedEngineLoad.size() > 0)
 		{
+			engineLoadSamples = calculatedEngineLoad.size()
 			averageEngineLoad = statisticsGeneratorService.getAverageEngineLoad(calculatedEngineLoad)
 		}
 
 		if(engineFuelRate.size() > 0)
 		{
+			mpgSamples = engineFuelRate.size()
 			averageMPG = statisticsGeneratorService.getAverageMPG(engineFuelRate)
 		}
 
@@ -963,8 +965,13 @@ class JourneyDataManipulationService {
 
 		if(throttlePosition.size() > 0 && vehicleSpeedData.size() > 0)
 		{
+			throttleSamples = throttlePosition.size()
 			averagePercentageCoasting = statisticsGeneratorService.getAveragePercentageCoasting(vehicleSpeedData, throttlePosition)
 		}
-
+		
 	}
+	
+	
+	
 }
+

@@ -18,444 +18,645 @@
 			</div>
 		</g:if>
 
-############# USE SEMANTIC LABELS EXTENSIVELY ON THIS PAGE ############ 
-DO A WIDE ITEM SECTION FOR EACH CAR COMPNENT, SPECS - ACCORDIAN FOR GRAPHS, OR VICE VERSA?
-
 		<div class="ui segment">
-			<div class="ui left rail animated slideInLeft">
+			<div class="ui left rail">
 				<div class="ui segment">
 					<div class="ui image">
-						<asset:image
-							src="manufacturer-logos/${vehicleInstanceList?.make[0]}.png"
-							class="ui medium bordered image" />
+						<asset:image src="manufacturer-logos/${vehicleInstance?.make}.png"
+							class="ui medium image" />
 					</div>
 					</br> </br>
 					<div class="content">
-						<h3>
-							${vehicleInstanceList?.make[0]}
-						</h3>
+						<div class="ui red ribbon label">
+							<h3>
+								${vehicleInstance?.make}
+								${vehicleInstance?.model}
+							</h3>
+						</div>
+
+						</br>
+
 						<div class="description">
-							${new File("grails-app/assets/descriptions/${vehicleInstanceList?.make[0]}.txt").getText('UTF-8')}
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="ui right rail animated slideInRight">
-				<div class="ui segment">
 
-					<div class="ui horizontal statistics">
-						<h2>
-							${vehicleInstanceList?.make[0]}
-							Statistics
-						</h2>
-						<div class="green statistic">
-							<div class="value">27</div>
-							<div class="label">Vehicles</div>
-						</div>
-						<div class="green statistic">
-							<div class="value">8</div>
-							<div class="label">Models</div>
-						</div>
-						<div class="green statistic">
-							<div class="value">28</div>
-							<div class="label">Journeys</div>
-						</div>
-						<div class="green statistic">
-							<div class="value">28</div>
-							<div class="label">Average Age</div>
-						</div>
-						<div class="green statistic">
-							<div class="value">7</div>
-							<div class="label">Hours</div>
-						</div>
-						<div class="orange statistic">
-							<div class="value">7</div>
-							<div class="label">Average Speed</div>
-						</div>
-						<div class="orange statistic">
-							<div class="value">7</div>
-							<div class="label">Average RPM</div>
-						</div>
-						<div class="red statistic">
-							<div class="value">7</div>
-							<div class="label">Heavy Braking</div>
-						</div>
-						<div class="red statistic">
-							<div class="value">7</div>
-							<div class="label">Heavy Acceleration</div>
-						</div>
-					</div>
-				</div>
-			</div>
+							<div class="ui animated selection list">
 
-			<div class="ui fluid image">
-				<img
-					src="https://www.amcharts.com/wp-content/uploads/2015/07/static_demo_392.jpg">
-			</div>
-
-			most popular country, gender pie chart, average age. </br> </br>
-			<g:each in="${vehicleInstanceList}" status="i" var="vehicleInstance">
-				<div style="width: 100%; padding: 20px">
-
-					<div class="item">
-						<div class="middle aligned content">
-							<div class="ui header">
-
-								<h2>
-									<div class="ui image">
-										<asset:image
-											src="manufacturer-logos/${vehicleInstance?.make}.png"
-											class="ui avatar image" />
-									</div>
-									${vehicleInstance?.year}
-									${vehicleInstance?.model}
-								</h2>
-							</div>
-
-							<div class="description">
-
-								<div class="ui equal width grid">
-									<div class="column">
-
-										<div class="ui card">
-											<div class="content">
-												<div class="ui green ribbon label">
-													<i class="user icon"></i> Driver
-												</div>
-												<div class="description">
-													Aged
-													${vehicleInstance?.driver?.dateOfBirth}
-												</div>
-												<div class="description">
-													${vehicleInstance?.driver?.gender}
-												</div>
-
-												<div class="description">
-													${vehicleInstance?.driver?.country}
-												</div>
-											</div>
+								<div class="item">
+									<asset:image src="user.png" class="ui avatar image" />
+									<div class="content">
+										<div class="header">
+											${Calendar.getInstance().get(Calendar.YEAR) - vehicleInstance?.driver.year}
 										</div>
-
+										Age
 									</div>
-
-									<div class="column">
-
-										<div class="ui card">
-											<div class="content">
-												<div class="ui red ribbon label">
-													<i class="car icon"></i> Vehicle
-												</div>
-												<div class="description">
-													${vehicleInstance?.engineSize}L Engine
-												</div>
-												<div class="description">
-													${vehicleInstance?.transmissionType}
-												</div>
-
-												<div class="description">
-													${vehicleInstance?.vehicleStyle}
-												</div>
-											</div>
-										</div>
-
-									</div>
-
-									<div class="column">
-
-										<div class="ui card">
-											<div class="content">
-												<div class="ui blue ribbon label">
-													<i class="line chart icon"></i> Statistics
-												</div>
-												<div class="description">Heavy Acceleration</div>
-												<div class="description">Heavy Braking</div>
-
-												<div class="description">Average Speed</div>
-											</div>
-										</div>
-
-									</div>
-
 								</div>
 
+								<div class="item">
+									<asset:image src="user.png" class="ui avatar image" />
+									<div class="content">
+										<div class="header">
+											${vehicleInstance?.driver.gender}
+										</div>
+										Gender
+									</div>
+								</div>
+
+								<div class="item">
+									<asset:image src="user.png" class="ui avatar image" />
+									<div class="content">
+										<div class="header">
+											${vehicleInstance?.driver.country}
+										</div>
+										Country
+									</div>
+								</div>
+
+								<div class="item">
+									<asset:image src="car4.png" class="ui avatar image" />
+									<div class="content">
+										<div class="header">
+											${vehicleInstance?.year}
+										</div>
+										Year
+									</div>
+								</div>
+
+								<div class="item">
+									<asset:image src="car4.png" class="ui avatar image" />
+									<div class="content">
+										<div class="header">
+											${vehicleInstance?.vehicleStyle}
+										</div>
+										Style
+									</div>
+								</div>
+
+								<div class="item">
+									<asset:image src="car4.png" class="ui avatar image" />
+									<div class="content">
+										<div class="header">
+											${vehicleInstance?.vehicleClass}
+										</div>
+										Class
+									</div>
+								</div>
+
+								<g:if test="${vehicleInstance?.numOfDoors}">
+									<div class="item">
+										<asset:image src="car4.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.numOfDoors}
+											</div>
+											Number Of Doors
+										</div>
+									</div>
+								</g:if>
+
+
+								<g:if test="${vehicleInstance?.colourCodes}">
+									<div class="item">
+										<asset:image src="car4.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												<g:each in="${vehicleInstance.colourCodes}" var="j">
+													<a class="ui circular label" style="background-color: #${j}"></a>
+												</g:each>
+											</div>
+											Colours
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.features}">
+									<div class="item">
+										<asset:image src="car4.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												<div class="ui selection list">
+													<g:each in="${vehicleInstance.features}" var="j">
+														<div class="item header">
+															${j}
+														</div>
+													</g:each>
+												</div>
+											</div>
+											Features
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.engineSize}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.engineSize}
+												L
+											</div>
+											Engine Size
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.engineDisplacement}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.engineDisplacement}
+												cc
+											</div>
+											Displacement
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.engineConfiguration}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.engineConfiguration}
+											</div>
+											Configuration
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.cylinders}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.cylinders}
+											</div>
+											Cylinders
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.totalEngineValves}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.totalEngineValves}
+											</div>
+											Valves
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.compressionRatio}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.compressionRatio}
+											</div>
+											Compression Ratio
+										</div>
+									</div>
+								</g:if>
+
+
+								<g:if test="${vehicleInstance?.manufacturerEngineCode}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.manufacturerEngineCode}
+											</div>
+											Engine Code
+										</div>
+									</div>
+								</g:if>
+
+
+								<g:if test="${vehicleInstance?.horsepower}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.horsepower}
+												bhp
+											</div>
+											Horsepower
+										</div>
+									</div>
+								</g:if>
+
+
+								<g:if test="${vehicleInstance?.manufacturerEngineCode}">
+									<div class="item">
+										<asset:image src="engine.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.torque}
+												ft lb
+											</div>
+											Torque
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.fuelType}">
+									<div class="item">
+										<asset:image src="fuel.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.fuelType}
+											</div>
+											Fuel
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.mpgHighway}">
+									<div class="item">
+										<asset:image src="fuel.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.mpgHighway}
+											</div>
+											MPG Motorway
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.mpgCity}">
+									<div class="item">
+										<asset:image src="fuel.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.mpgCity}
+											</div>
+											MPG City
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.transmissionType}">
+									<div class="item">
+										<asset:image src="gear.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.transmissionType}
+											</div>
+											Transmission Type
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.numberOfSpeeds}">
+									<div class="item">
+										<asset:image src="gear.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												${vehicleInstance?.numberOfSpeeds}
+											</div>
+											Number Of Speeds
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.newPrice}">
+									<div class="item">
+										<asset:image src="money.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												<g:formatNumber number="${vehicleInstance?.newPrice}"
+													type="currency" currencyCode="USD" />
+											</div>
+											New Price
+										</div>
+									</div>
+								</g:if>
+
+								<g:if test="${vehicleInstance?.usedPrice}">
+									<div class="item">
+										<asset:image src="money.png" class="ui avatar image" />
+										<div class="content">
+											<div class="header">
+												<g:formatNumber number="${vehicleInstance?.usedPrice}"
+													type="currency" currencyCode="USD" />
+											</div>
+											Used Price
+										</div>
+									</div>
+								</g:if>
+
+
+
+
 
 							</div>
 
-				<g:if test="${vehicleInstance?.identifier}">
-				<li class="fieldcontain">
-					<span id="identifier-label" class="property-label"><g:message code="vehicle.identifier.label" default="Identifier" /></span>
-					
-						<span class="property-value" aria-labelledby="identifier-label"><g:fieldValue bean="${vehicleInstance}" field="identifier"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.driver}">
-				<li class="fieldcontain">
-					<span id="driver-label" class="property-label"><g:message code="vehicle.driver.label" default="Driver" /></span>
-					
-						<span class="property-value" aria-labelledby="driver-label"><g:link controller="driver" action="show" id="${vehicleInstance?.driver?.id}">${vehicleInstance?.driver?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.make}">
-				<li class="fieldcontain">
-					<span id="make-label" class="property-label"><g:message code="vehicle.make.label" default="Make" /></span>
-					
-						<span class="property-value" aria-labelledby="make-label"><g:fieldValue bean="${vehicleInstance}" field="make"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.model}">
-				<li class="fieldcontain">
-					<span id="model-label" class="property-label"><g:message code="vehicle.model.label" default="Model" /></span>
-					
-						<span class="property-value" aria-labelledby="model-label"><g:fieldValue bean="${vehicleInstance}" field="model"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.year}">
-				<li class="fieldcontain">
-					<span id="year-label" class="property-label"><g:message code="vehicle.year.label" default="Year" /></span>
-					
-						<span class="property-value" aria-labelledby="year-label"><g:fieldValue bean="${vehicleInstance}" field="year"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.engineConfiguration}">
-				<li class="fieldcontain">
-					<span id="engineConfiguration-label" class="property-label"><g:message code="vehicle.engineConfiguration.label" default="Engine Configuration" /></span>
-					
-						<span class="property-value" aria-labelledby="engineConfiguration-label"><g:fieldValue bean="${vehicleInstance}" field="engineConfiguration"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.engineDisplacement}">
-				<li class="fieldcontain">
-					<span id="engineDisplacement-label" class="property-label"><g:message code="vehicle.engineDisplacement.label" default="Engine Displacement" /></span>
-					
-						<span class="property-value" aria-labelledby="engineDisplacement-label"><g:fieldValue bean="${vehicleInstance}" field="engineDisplacement"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.manufacturerEngineCode}">
-				<li class="fieldcontain">
-					<span id="manufacturerEngineCode-label" class="property-label"><g:message code="vehicle.manufacturerEngineCode.label" default="Manufacturer Engine Code" /></span>
-					
-						<span class="property-value" aria-labelledby="manufacturerEngineCode-label"><g:fieldValue bean="${vehicleInstance}" field="manufacturerEngineCode"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.totalEngineValves}">
-				<li class="fieldcontain">
-					<span id="totalEngineValves-label" class="property-label"><g:message code="vehicle.totalEngineValves.label" default="Total Engine Valves" /></span>
-					
-						<span class="property-value" aria-labelledby="totalEngineValves-label"><g:fieldValue bean="${vehicleInstance}" field="totalEngineValves"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.cylinders}">
-				<li class="fieldcontain">
-					<span id="cylinders-label" class="property-label"><g:message code="vehicle.cylinders.label" default="Cylinders" /></span>
-					
-						<span class="property-value" aria-labelledby="cylinders-label"><g:fieldValue bean="${vehicleInstance}" field="cylinders"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.compressionRatio}">
-				<li class="fieldcontain">
-					<span id="compressionRatio-label" class="property-label"><g:message code="vehicle.compressionRatio.label" default="Compression Ratio" /></span>
-					
-						<span class="property-value" aria-labelledby="compressionRatio-label"><g:fieldValue bean="${vehicleInstance}" field="compressionRatio"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.engineSize}">
-				<li class="fieldcontain">
-					<span id="engineSize-label" class="property-label"><g:message code="vehicle.engineSize.label" default="Engine Size" /></span>
-					
-						<span class="property-value" aria-labelledby="engineSize-label"><g:fieldValue bean="${vehicleInstance}" field="engineSize"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.horsepower}">
-				<li class="fieldcontain">
-					<span id="horsepower-label" class="property-label"><g:message code="vehicle.horsepower.label" default="Horsepower" /></span>
-					
-						<span class="property-value" aria-labelledby="horsepower-label"><g:fieldValue bean="${vehicleInstance}" field="horsepower"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.torque}">
-				<li class="fieldcontain">
-					<span id="torque-label" class="property-label"><g:message code="vehicle.torque.label" default="Torque" /></span>
-					
-						<span class="property-value" aria-labelledby="torque-label"><g:fieldValue bean="${vehicleInstance}" field="torque"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.fuelType}">
-				<li class="fieldcontain">
-					<span id="fuelType-label" class="property-label"><g:message code="vehicle.fuelType.label" default="Fuel Type" /></span>
-					
-						<span class="property-value" aria-labelledby="fuelType-label"><g:fieldValue bean="${vehicleInstance}" field="fuelType"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.drivenWheels}">
-				<li class="fieldcontain">
-					<span id="drivenWheels-label" class="property-label"><g:message code="vehicle.drivenWheels.label" default="Driven Wheels" /></span>
-					
-						<span class="property-value" aria-labelledby="drivenWheels-label"><g:fieldValue bean="${vehicleInstance}" field="drivenWheels"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.transmissionType}">
-				<li class="fieldcontain">
-					<span id="transmissionType-label" class="property-label"><g:message code="vehicle.transmissionType.label" default="Transmission Type" /></span>
-					
-						<span class="property-value" aria-labelledby="transmissionType-label"><g:fieldValue bean="${vehicleInstance}" field="transmissionType"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.vehicleStyle}">
-				<li class="fieldcontain">
-					<span id="vehicleStyle-label" class="property-label"><g:message code="vehicle.vehicleStyle.label" default="Vehicle Style" /></span>
-					
-						<span class="property-value" aria-labelledby="vehicleStyle-label"><g:fieldValue bean="${vehicleInstance}" field="vehicleStyle"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.vehicleClass}">
-				<li class="fieldcontain">
-					<span id="vehicleClass-label" class="property-label"><g:message code="vehicle.vehicleClass.label" default="Vehicle Class" /></span>
-					
-						<span class="property-value" aria-labelledby="vehicleClass-label"><g:fieldValue bean="${vehicleInstance}" field="vehicleClass"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.numberOfSpeeds}">
-				<li class="fieldcontain">
-					<span id="numberOfSpeeds-label" class="property-label"><g:message code="vehicle.numberOfSpeeds.label" default="Number Of Speeds" /></span>
-					
-						<span class="property-value" aria-labelledby="numberOfSpeeds-label"><g:fieldValue bean="${vehicleInstance}" field="numberOfSpeeds"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.numOfDoors}">
-				<li class="fieldcontain">
-					<span id="numOfDoors-label" class="property-label"><g:message code="vehicle.numOfDoors.label" default="Num Of Doors" /></span>
-					
-						<span class="property-value" aria-labelledby="numOfDoors-label"><g:fieldValue bean="${vehicleInstance}" field="numOfDoors"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.mpgHighway}">
-				<li class="fieldcontain">
-					<span id="mpgHighway-label" class="property-label"><g:message code="vehicle.mpgHighway.label" default="Mpg Highway" /></span>
-					
-						<span class="property-value" aria-labelledby="mpgHighway-label"><g:fieldValue bean="${vehicleInstance}" field="mpgHighway"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.mpgCity}">
-				<li class="fieldcontain">
-					<span id="mpgCity-label" class="property-label"><g:message code="vehicle.mpgCity.label" default="Mpg City" /></span>
-					
-						<span class="property-value" aria-labelledby="mpgCity-label"><g:fieldValue bean="${vehicleInstance}" field="mpgCity"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.newPrice}">
-				<li class="fieldcontain">
-					<span id="newPrice-label" class="property-label"><g:message code="vehicle.newPrice.label" default="New Price" /></span>
-					
-						<span class="property-value" aria-labelledby="newPrice-label"><g:fieldValue bean="${vehicleInstance}" field="newPrice"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.usedPrice}">
-				<li class="fieldcontain">
-					<span id="usedPrice-label" class="property-label"><g:message code="vehicle.usedPrice.label" default="Used Price" /></span>
-					
-						<span class="property-value" aria-labelledby="usedPrice-label"><g:fieldValue bean="${vehicleInstance}" field="usedPrice"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.colourNames}">
-				<li class="fieldcontain">
-					<span id="colourNames-label" class="property-label"><g:message code="vehicle.colourNames.label" default="Colour Names" /></span>
-					
-						<span class="property-value" aria-labelledby="colourNames-label"><g:fieldValue bean="${vehicleInstance}" field="colourNames"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.colourCodes}">
-				<li class="fieldcontain">
-					<span id="colourCodes-label" class="property-label"><g:message code="vehicle.colourCodes.label" default="Colour Codes" /></span>
-					
-						<span class="property-value" aria-labelledby="colourCodes-label"><g:fieldValue bean="${vehicleInstance}" field="colourCodes"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.features}">
-				<li class="fieldcontain">
-					<span id="features-label" class="property-label"><g:message code="vehicle.features.label" default="Features" /></span>
-					
-						<span class="property-value" aria-labelledby="features-label"><g:fieldValue bean="${vehicleInstance}" field="features"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${vehicleInstance?.journeys}">
-				<li class="fieldcontain">
-					<span id="journeys-label" class="property-label"><g:message code="vehicle.journeys.label" default="Journeys" /></span>
-					
-						<g:each in="${vehicleInstance.journeys}" var="j">
-						<span class="property-value" aria-labelledby="journeys-label"><g:link controller="journey" action="show" id="${j.id}">${j?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
+						</div>
+					</div>
+				</div>
+				</br> </br> </br>
+			</div>
+			<div class="ui right rail">
+				<div class="ui segment">
 
-							</br>
-							<div class="extra">
-							<g:link action="show" id="${vehicleInstance?.id}" class="ui right floated black button">View Vehicle
-									Data</g:link>
-							</div>
+					<div class="content">
+						<div class="ui red ribbon label">
+							<h3>
+								Follow
+								${vehicleInstance?.identifier}
+							</h3>
 						</div>
 					</div>
 
+					</br>
+
+					<div align="center">
+
+						<qrcode:image text="${vehicleInstance?.identifier}" height="250" width="250"/>
+
+						<h5>Follow This Vehicle Using The Android App. Just Open The
+							Menu and Choose Following.</h5>
+					</div>
+					</br>
+
+					<div class="ui red ribbon label">
+						<h3>Vehicle Statistics</h3>
+					</div>
+
+					<div class="ui animated selection list">
+						<div class="item">
+							<asset:image src="road.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									${vehicleInstance?.journeys.size()}
+								</div>
+								Journeys
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="clock.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${(vehicleInstance?.overallStatistics?.totalTimeLength)/ 3600}"
+										maxFractionDigits="1" />
+								</div>
+								Hours Driven
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="speedometer.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.averageSpeed}"
+										maxFractionDigits="0" />
+									kph
+								</div>
+								Average Speed
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="speedometer.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									${vehicleInstance?.overallStatistics?.topSpeed}
+									kph
+								</div>
+								Highest Recorded Speed
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="rpm.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.averageRPM}"
+										maxFractionDigits="0" />
+									rpm
+								</div>
+								Average RPM
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="rpm.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									${vehicleInstance?.overallStatistics?.topRPM}
+									rpm
+								</div>
+								Highest Recorded RPM
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="rpm.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									${vehicleInstance?.overallStatistics?.averagePercentageHighRPM}
+									%
+								</div>
+								Driven at High RPM
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="car4.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									${vehicleInstance?.overallStatistics?.heavyAccelerationCount}
+								</div>
+								Heavy Acceleration Count
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="brake.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									${vehicleInstance?.overallStatistics?.heavyBrakingCount}
+								</div>
+								Heavy Braking Count
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="engine.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.averageEngineLoad}"
+										maxFractionDigits="0" />
+									%
+								</div>
+								Average Engine Load
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="throttle.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.averageThrottlePosition}"
+										maxFractionDigits="0" />
+									%
+								</div>
+								Average Throttle Position
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="idle.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.averagePercentageIdle}"
+										maxFractionDigits="0" />
+									%
+								</div>
+								Average Percentage Idle
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="radar.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.averageGForce}"
+										maxFractionDigits="2" />
+									g
+								</div>
+								Average G Force
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="radar.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.topAccelerationGforce}"
+										maxFractionDigits="2" />
+									g
+								</div>
+								Highest Acceleration G Force
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="radar.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.topDecelerationGforce}"
+										maxFractionDigits="2" />
+									g
+								</div>
+								Highest Deceleration G Force
+							</div>
+						</div>
+						<div class="item">
+							<asset:image src="car3.png" class="ui avatar image" />
+							<div class="content">
+								<div class="header">
+									<g:formatNumber
+										number="${vehicleInstance?.overallStatistics?.averagePercentageCoasting}"
+										maxFractionDigits="0" />
+									%
+								</div>
+								Average Percentage Coasting
+							</div>
+						</div>
+
+
+
+					</div>
+				</div>
+			</div>
+
+			<div class="ui red ribbon label">
+				<h3>Journeys</h3>
+			</div>
+
+			<g:if
+				test="${journeys == null || vehicleInstance?.journeys.size() == 0}">
+
+				<div align="center">
+					<asset:image src="close.png" class="ui tiny image" />
+					<h3>No Journeys</h3>
 				</div>
 
-				</br>
-			</g:each>
+			</g:if>
+			<g:if test="${journeys}">
+
+				<div class="ui animated divided list">
+					<g:each in="${journeys}" var="journey">
+						<div class="item">
+							</br>
+							<g:if
+								test="${journey?.startTime?.getAt(Calendar.HOUR_OF_DAY) <= 20 && journey?.startTime?.getAt(Calendar.HOUR_OF_DAY) >= 7}">
+								<div class="ui image">
+									<asset:image src="sun.png" class="ui avatar image" />
+								</div>
+							</g:if>
+							<g:if
+								test="${journey?.startTime?.getAt(Calendar.HOUR_OF_DAY) >= 21 || journey?.startTime?.getAt(Calendar.HOUR_OF_DAY) <= 6}">
+								<div class="ui image">
+									<asset:image src="moon.png" class="ui avatar image" />
+								</div>
+							</g:if>
+							<div class="content">
+								<div class="header">
+									<h2>
+										<small><g:formatDate date="${journey?.startTime}"
+												type="datetime" style="MEDIUM" /> <i
+											class="long arrow right icon"></i> <g:formatDate
+												date="${journey?.endTime}" type="datetime" style="MEDIUM" />
+										</small>
+									</h2>
+
+								</div>
+							</div>
+
+							<h3>
+								<small>Journey Overview</small>
+							</h3>
+
+							<div class="ui left floated small brown basic label">
+								Vehicle ID :
+								${vehicleInstance?.identifier}
+							</div>
+							<div class="ui left floated small green basic label">
+								${vehicleInstance?.engineSize}L
+								${vehicleInstance?.engineConfiguration}
+								${vehicleInstance?.cylinders}
+								Cylinder Engine
+							</div>
+							<div class="ui left floated small green basic label">
+								${vehicleInstance?.transmissionType}
+								Gearbox
+							</div>
+							<div class="ui left floated small green basic label">
+								${vehicleInstance?.vehicleStyle}
+								(${vehicleInstance?.vehicleClass})
+							</div>
+							<div class="ui left floated small green basic label">
+								${vehicleInstance?.fuelType}
+							</div>
+
+
+
+							<g:link controller="journey" action="show" id="${journey.id}"
+								class="ui right floated small red labeled icon button">
+								<i class="right arrow icon"></i>
+								View Journey
+									Data</g:link>
+
+							</br>
+						</div>
+					</g:each>
+				</div>
+			</g:if>
+
+			</br> </br>
+
+
+
+
 		</div>
 
 
@@ -472,7 +673,6 @@ DO A WIDE ITEM SECTION FOR EACH CAR COMPNENT, SPECS - ACCORDIAN FOR GRAPHS, OR V
 
 
 
-			
 
-			
-			
+
+

@@ -58,8 +58,10 @@
 			</div>
 			<div class="item">
 				<div class="ui icon input">
-					<input type="text" placeholder="Search..."> <i
-						class="search link icon"></i>
+					<i class="search link icon"></i>
+					<g:form controller="vehicle" action="show">
+				            <g:textField placeholder="Enter Vehicle ID" name="id" value="${params.id}"/>
+				    </g:form>
 				</div>
 			</div>
 		</div>
@@ -72,7 +74,7 @@
 	<div align="center" class="footer ui container" role="contentinfo">
 		<div align="center" class="item image ui micro small">
 			<asset:image src="logo-white-small.png" alt="Grails" />
-			<h6>Drive - The Open Car Network</h6>
+			<h5 style="color: #fff">The Open Car Network</h5>
 		</div>
 	</div>
 	</div>

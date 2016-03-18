@@ -43,24 +43,34 @@ class ApiController {
 		def data = request.JSON
 
 		// Picking out Driver information and car data
-		def dateOfBirth = data.dateOfBirth;
 		def gender = data.gender;
-		def country = data.country.toLowerCase();
-		def carData = data.carData
+		def country = data.country;
+		def carData = data.carData;
+		
+		
+		def dateOfBirth = new Date().copyWith(
+			year: data.dateOfBirth.year,
+			month: data.dateOfBirth.month,
+			dayOfMonth: data.dateOfBirth.dayOfMonth,
+			hourOfDay: 1,
+			minute: 1,
+			second: 1)
+		
+		def year = data.dateOfBirth.year.toString()
 
 		// Generate a new ID for the vehicle. This ID will be globally unique.
 		String id = vehicleService.generateUniqueID();
 
 		// Check if some of the key attributes are null
-		if (dateOfBirth == null | gender == null | country == null | carData.model.name== null | carData.make.name == null | carData.year.year == null) {
+		if (dateOfBirth == null || gender == null || country == null || year == null || carData.model.name== null || carData.make.name == null || carData.year.year == null) {
 			// Send 405 if any of the key data is null
 			respond status: NOT_ACCEPTABLE
 			return
 		}
 
 		// Create a new driver and save them to the database
-		def driver = new Driver("gender": gender, "dateOfBirth": Date.parse( 'dd-MM-yyyy', dateOfBirth ), "country": country)
-
+		def driver = new Driver("gender": gender, "dateOfBirth": dateOfBirth, "country": country, "year": year)
+		
 		// validate that the driver attributes obey the constraints set out in the domain class
 		driver.validate()
 		if (driver.hasErrors()) {
@@ -78,10 +88,38 @@ class ApiController {
 
 		// Set to hold cars notable features list
 		def features = vehicleService.getFeatures(carData)
+		
+		def overallStatistics = new OverallStatistics("totalTimeLength" : 0,
+		"heavyAccelerationCount" : 0,
+		"heavyBrakingCount" : 0,
+		"averageSpeed" : 0,
+		"averageRPM" : 0,
+		"topSpeed" : 0,
+		"topRPM" : 0,
+		"averageGForce" : 0,
+		"averagePercentageCoasting" : 0,
+		"averagePercentageIdle" : 0,
+		"averageThrottlePosition" : 0,
+		"averageEngineLoad" : 0,
+		"averageMPG" : 0,
+		"averagePercentageHighRPM" : 0,
+		"topAccelerationGforce" : 0,
+		"topDecelerationGforce" : 0,
+		"speedSamples" : 0,
+		"rpmSamples" : 0,
+		"idleSamples" : 0,
+		"gForceSamples" : 0,
+		"engineLoadSamples" : 0,
+		"mpgSamples" : 0,
+		"throttleSamples" : 0)
+		
+		// save the overall statistics to the database
+		overallStatistics.save()
 
 		// create the new vehicle object
 		def vehicle = new Vehicle("identifier": id,
 		"driver": driver,
+		"overallStatistics": overallStatistics,
 		"year": carData.year?.year,
 		"make": carData.make?.name,
 		"model": carData.model?.name,
@@ -159,10 +197,11 @@ class ApiController {
 
 		// The raw list of hex values from the car sensors
 		def journeyData = data.journeyData;
+				
 
 		// Send the data to be processed by the manipulation service
 		def result = journeyDataManipulationService.process(journeyData);
-
+		
 		// List of human readable sensor names
 		def sensorNames = [
 			"Calculated Engine Load",
@@ -297,7 +336,7 @@ class ApiController {
 
 			for(int i = 0; i < sensorData.size(); i++)
 			{
-				def point = new Point("value": sensorData[i], "sensor": newSensor)
+				def point = new Point("index": i ,"value": sensorData[i], "sensor": newSensor)
 				points << point
 			}
 
@@ -321,37 +360,74 @@ class ApiController {
 
 		// update the overall driving time
 		vehicle.overallStatistics.totalTimeLength += journeyTimeLength
+		
 		// Update the top speed value for the vehicle if a new top speed was reached
 		vehicle.overallStatistics.topSpeed = (topSpeed > vehicle.overallStatistics.topSpeed) ? topSpeed : vehicle.overallStatistics.topSpeed
+		
 		// Update the top rpm value for the vehicle if a new top rpm was reached
 		vehicle.overallStatistics.topRPM = (topRPM > vehicle.overallStatistics.topRPM) ? topRPM : vehicle.overallStatistics.topRPM
-		// Update the average speed value for the vehicle
-		vehicle.overallStatistics.averageSpeed = ((vehicle.overallStatistics.averageSpeed * vehicle.overallStatistics.speedSamples) + (averageSpeed * speedSamples)) / (vehicle.overallStatistics.speedSamples + speedSamples)
-		// Update the average rpm value for the vehicle
-		vehicle.overallStatistics.averageRPM = ((vehicle.overallStatistics.averageRPM * vehicle.overallStatistics.rpmSamples) + (averageRPM * rpmSamples)) / (vehicle.overallStatistics.rpmSamples + rpmSamples)
+		
+		if(speedSamples > 0)
+		{
+			// Update the average speed value for the vehicle
+			vehicle.overallStatistics.averageSpeed = ((vehicle.overallStatistics.averageSpeed * vehicle.overallStatistics.speedSamples) + (averageSpeed * speedSamples)) / (vehicle.overallStatistics.speedSamples + speedSamples)
+			// Update the average percentage coasting value for the vehicle
+			vehicle.overallStatistics.averagePercentageCoasting = ((vehicle.overallStatistics.averagePercentageCoasting * vehicle.overallStatistics.speedSamples) + (averagePercentageCoasting * speedSamples)) / (vehicle.overallStatistics.speedSamples + speedSamples)
+		}
+		
+		if(rpmSamples > 0)
+		{
+			// Update the average rpm value for the vehicle
+			vehicle.overallStatistics.averageRPM = ((vehicle.overallStatistics.averageRPM * vehicle.overallStatistics.rpmSamples) + (averageRPM * rpmSamples)) / (vehicle.overallStatistics.rpmSamples + rpmSamples)
+			
+			// Update the average percentage high RPM value for the vehicle
+			vehicle.overallStatistics.averagePercentageHighRPM = ((vehicle.overallStatistics.averagePercentageHighRPM * vehicle.overallStatistics.rpmSamples) + (averagePercentageHighRPM * rpmSamples)) / (vehicle.overallStatistics.rpmSamples + rpmSamples)
+		}
+		
 		// Update the heavy braking count for the vehicle
 		vehicle.overallStatistics.heavyBrakingCount += heavyBrakingCount
+		
 		// Update the heavy acceleration count for the vehicle
 		vehicle.overallStatistics.heavyAccelerationCount += heavyAccelerationCount
-		// Update the average percentage idle value for the vehicle
-		vehicle.overallStatistics.averagePercentageIdle = ((vehicle.overallStatistics.averagePercentageIdle * vehicle.overallStatistics.idleSamples) + (averagePercentageIdle * idleSamples)) / (vehicle.overallStatistics.idleSamples + idleSamples)
-		// Update the average G Force value for the vehicle
-		vehicle.overallStatistics.averageGForce = ((vehicle.overallStatistics.averageGForce * vehicle.overallStatistics.gForceSamples) + (averageGForce * gForceSamples)) / (vehicle.overallStatistics.gForceSamples + gForceSamples)
+		
+		if(idleSamples > 0)
+		{
+			// Update the average percentage idle value for the vehicle
+			vehicle.overallStatistics.averagePercentageIdle = ((vehicle.overallStatistics.averagePercentageIdle * vehicle.overallStatistics.idleSamples) + (averagePercentageIdle * idleSamples)) / (vehicle.overallStatistics.idleSamples + idleSamples)
+		}
+		
+		if(gForceSamples > 0)
+		{
+			// Update the average G Force value for the vehicle
+			vehicle.overallStatistics.averageGForce = ((vehicle.overallStatistics.averageGForce * vehicle.overallStatistics.gForceSamples) + (averageGForce * gForceSamples)) / (vehicle.overallStatistics.gForceSamples + gForceSamples)
+		}
+		
 		// Update the top acceleration g force value for the vehicle if a top acceleration g force was reached
 		vehicle.overallStatistics.topAccelerationGforce = (topAccelerationGforce > vehicle.overallStatistics.topAccelerationGforce) ? topAccelerationGforce : vehicle.overallStatistics.topAccelerationGforce
+		
 		// Update the top deceleration g force value for the vehicle if a top deceleration g force was reached
 		vehicle.overallStatistics.topDecelerationGforce = (topDecelerationGforce > vehicle.overallStatistics.topDecelerationGforce) ? topDecelerationGforce : vehicle.overallStatistics.topDecelerationGforce
-		// Update the average percentage high RPM value for the vehicle
-		vehicle.overallStatistics.averagePercentageHighRPM = ((vehicle.overallStatistics.averagePercentageHighRPM * vehicle.overallStatistics.rpmSamples) + (averagePercentageHighRPM * rpmSamples)) / (vehicle.overallStatistics.rpmSamples + rpmSamples)
-		// Update the average engine load value for the vehicle
-		vehicle.overallStatistics.averageEngineLoad = ((vehicle.overallStatistics.averageEngineLoad * vehicle.overallStatistics.engineLoadSamples) + (averageEngineLoad * engineLoadSamples)) / (vehicle.overallStatistics.engineLoadSamples + engineLoadSamples)
-		// Update the average mpg value for the vehicle
-		vehicle.overallStatistics.averageMPG = ((vehicle.overallStatistics.averageMPG * vehicle.overallStatistics.mpgSamples) + (averageMPG * mpgSamples)) / (vehicle.overallStatistics.mpgSamples + mpgSamples)
-		// Update the average throttle position value for the vehicle
-		vehicle.overallStatistics.averageThrottlePosition = ((vehicle.overallStatistics.averageThrottlePosition * vehicle.overallStatistics.throttleSamples) + (averageThrottlePosition * throttleSamples)) / (vehicle.overallStatistics.throttleSamples + throttleSamples)
-		// Update the average percentage coasting value for the vehicle
-		vehicle.overallStatistics.averagePercentageCoasting = ((vehicle.overallStatistics.averagePercentageCoasting * vehicle.overallStatistics.speedSamples) + (averagePercentageCoasting * speedSamples)) / (vehicle.overallStatistics.speedSamples + speedSamples)
-
+		
+		if(engineLoadSamples > 0)
+		{
+			// Update the average engine load value for the vehicle
+			vehicle.overallStatistics.averageEngineLoad = ((vehicle.overallStatistics.averageEngineLoad * vehicle.overallStatistics.engineLoadSamples) + (averageEngineLoad * engineLoadSamples)) / (vehicle.overallStatistics.engineLoadSamples + engineLoadSamples)
+		}
+		
+		if(mpgSamples > 0)
+		{
+			// Update the average mpg value for the vehicle
+			vehicle.overallStatistics.averageMPG = ((vehicle.overallStatistics.averageMPG * vehicle.overallStatistics.mpgSamples) + (averageMPG * mpgSamples)) / (vehicle.overallStatistics.mpgSamples + mpgSamples)
+		}
+		
+		if(throttleSamples > 0)
+		{
+			// Update the average throttle position value for the vehicle
+			vehicle.overallStatistics.averageThrottlePosition = ((vehicle.overallStatistics.averageThrottlePosition * vehicle.overallStatistics.throttleSamples) + (averageThrottlePosition * throttleSamples)) / (vehicle.overallStatistics.throttleSamples + throttleSamples)
+		}
+		
+		vehicle.overallStatistics.save()
+		
 		// Send 200 OK, all data is valid and saved to DB successfully.
 		respond status: CREATED
 	}

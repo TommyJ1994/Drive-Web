@@ -77,7 +77,7 @@ class StatisticsGeneratorService {
 
 		for(int i = 0; i < rpmData.size(); i++) {
 			if(rpmData[i] > 3500) {
-				sum += sum
+				sum++
 			}
 		}
 
@@ -135,7 +135,7 @@ class StatisticsGeneratorService {
 
 		for(int i = 0; i < speedData.size(); i++) {
 			if(speedData[i] < 3) {
-				sum += sum
+				sum++
 			}
 		}
 		return (sum / speedData.size()) * 100
@@ -152,7 +152,7 @@ class StatisticsGeneratorService {
 		for(int i = 0; i < speedData.size(); i++) {
 			if(throttlePositionData[i] != null) {
 				if(speedData[i] > 5 && throttlePositionData[i] < 5) {
-					sum += sum
+					sum++
 				}
 			}
 		}
@@ -232,10 +232,10 @@ class StatisticsGeneratorService {
 
 		for(int i = 0; i < speedData.size(); i++) {
 			// check that the end of the list has not been reached
-			if(speedData[i + 5] != null && speedData[i] - speedData[i + 1] > 7)
+			if(speedData[i + 5] != null && speedData[i] - speedData[i + 1] > 11)
 			{
 				count++;
-				i+= 10 // Prevent a long brake being counted as multiple heavy brakings
+				i+= 5 // Prevent a long brake being counted as multiple heavy brakings
 			}
 		}
 		return count
@@ -251,10 +251,10 @@ class StatisticsGeneratorService {
 		for(int i = 0; i < speedData.size(); i++)
 		{
 			// check that the end of the list has not been reached
-			if(speedData[i + 5] != null && speedData[i + 1] - speedData[i] > 7)
+			if(speedData[i + 5] != null && speedData[i + 1] - speedData[i] > 11)
 			{
 				count++;
-				i+= 10 // Prevent a long acceleration being counted as multiple heavy accelerations
+				i+= 5 // Prevent a long acceleration being counted as multiple heavy accelerations
 			}
 		}
 		return count

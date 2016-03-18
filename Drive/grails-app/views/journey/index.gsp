@@ -24,17 +24,17 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="journeyTimeLength" title="${message(code: 'journey.journeyTimeLength.label', default: 'Journey Time Length')}" />
+						<g:sortableColumn property="averageAmbientAirTemperature" title="${message(code: 'journey.averageAmbientAirTemperature.label', default: 'Average Ambient Air Temperature')}" />
 					
-						<g:sortableColumn property="heavyAccelerationCount" title="${message(code: 'journey.heavyAccelerationCount.label', default: 'Heavy Acceleration Count')}" />
+						<g:sortableColumn property="averageEngineLoad" title="${message(code: 'journey.averageEngineLoad.label', default: 'Average Engine Load')}" />
 					
-						<g:sortableColumn property="heavyBrakingCount" title="${message(code: 'journey.heavyBrakingCount.label', default: 'Heavy Braking Count')}" />
+						<g:sortableColumn property="averageGForce" title="${message(code: 'journey.averageGForce.label', default: 'Average GF orce')}" />
 					
-						<g:sortableColumn property="averageSpeed" title="${message(code: 'journey.averageSpeed.label', default: 'Average Speed')}" />
+						<g:sortableColumn property="averageMPG" title="${message(code: 'journey.averageMPG.label', default: 'Average MPG')}" />
 					
-						<g:sortableColumn property="averageRPM" title="${message(code: 'journey.averageRPM.label', default: 'Average RPM')}" />
+						<g:sortableColumn property="averagePercentageCoasting" title="${message(code: 'journey.averagePercentageCoasting.label', default: 'Average Percentage Coasting')}" />
 					
-						<g:sortableColumn property="topSpeed" title="${message(code: 'journey.topSpeed.label', default: 'Top Speed')}" />
+						<g:sortableColumn property="averagePercentageHighRPM" title="${message(code: 'journey.averagePercentageHighRPM.label', default: 'Average Percentage High RPM')}" />
 					
 					</tr>
 				</thead>
@@ -42,17 +42,17 @@
 				<g:each in="${journeyInstanceList}" status="i" var="journeyInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${journeyInstance.id}">${fieldValue(bean: journeyInstance, field: "journeyTimeLength")}</g:link></td>
+						<td><g:link action="show" id="${journeyInstance.id}">${fieldValue(bean: journeyInstance, field: "averageAmbientAirTemperature")}</g:link></td>
 					
-						<td>${fieldValue(bean: journeyInstance, field: "heavyAccelerationCount")}</td>
+						<td>${fieldValue(bean: journeyInstance, field: "averageEngineLoad")}</td>
 					
-						<td>${fieldValue(bean: journeyInstance, field: "heavyBrakingCount")}</td>
+						<td>${fieldValue(bean: journeyInstance, field: "averageGForce")}</td>
 					
-						<td>${fieldValue(bean: journeyInstance, field: "averageSpeed")}</td>
+						<td>${fieldValue(bean: journeyInstance, field: "averageMPG")}</td>
 					
-						<td>${fieldValue(bean: journeyInstance, field: "averageRPM")}</td>
+						<td>${fieldValue(bean: journeyInstance, field: "averagePercentageCoasting")}</td>
 					
-						<td>${fieldValue(bean: journeyInstance, field: "topSpeed")}</td>
+						<td>${fieldValue(bean: journeyInstance, field: "averagePercentageHighRPM")}</td>
 					
 					</tr>
 				</g:each>

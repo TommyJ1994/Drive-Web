@@ -24,38 +24,18 @@
 <asset:javascript src="jsapi.js" />
 <g:layoutHead />
 </head>
-<body class="animated fadeIn" style="background: linear-gradient(180deg, #3367d6, #fff); height: 100%;margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;">
-	<div class="ui inverted primary menu" style="background-color: #3367d6">
+<body class="animated fadeIn">
+
+	<div class="ui inverted primary fixed menu" style="background-color: #0F2931">
 		<div class="item">
 			<asset:image src="logo-white-small.png" alt="Grails" />
 		</div>
-		<a href="/Drive" class="item"> Dashboard </a> <a class="item">
-			Features </a> <a class="item"> Getting Started </a>
-		<g:link class="item" controller="vehicle" action="manufacturers">Manufacturers</g:link>
-		<a class="item"> Vehicle Types </a>
+		<a href="/Drive" class="item"> <i class="dashboard icon"></i> Dashboard </a> <a class="item">
+			<i class="rocket icon"></i> Features </a> <a class="item"><i class="help icon"></i> Getting Started </a>
+		<g:link class="item" controller="vehicle" action="manufacturers"><i class="car icon"></i> Manufacturers</g:link>
+		<a class="item"> Vehicle Classes </a> <a class="item"> Fuel Classes </a> <a class="item"> Countries </a> 
 		<div class="right menu">
-			<div class="item">
-				<div class="ui icon users">
-					<i class="users icon"></i> 3,500 Drivers
-				</div>
-			</div>
-			<div class="item">
-				<div class="ui icon car">
-					<i class="car icon"></i> 4,500 Vehicles
-				</div>
-			</div>
-			<div class="item">
-				<div class="ui icon location arrow">
-					<i class="location arrow icon"></i> 38,500 Journeys
-				</div>
-			</div>
-			<div class="item">
-				<div class="ui icon clock">
-					<i class="clock icon"></i> 67,382 Hours
-				</div>
-			</div>
+			<a class="item" style="background: rgb(64, 151, 155);"><i class="android icon"></i> Download App </a>
 			<div class="item">
 				<div class="ui icon input">
 					<i class="search link icon"></i>
@@ -67,11 +47,11 @@
 		</div>
 	</div>
 	<div class="ui container responsive">
+	</br>
+		</br></br></br>
 		<g:layoutBody />
-		</br>
-		</br>
-	
-	<div align="center" class="footer ui container" role="contentinfo">
+		</br></br></br></br></br></br>
+	<div align="center" class="footer ui container">
 		<div align="center" class="item image ui micro small">
 			<asset:image src="logo-white-small.png" alt="Grails" />
 			<h5 style="color: #fff">The Open Car Network</h5>

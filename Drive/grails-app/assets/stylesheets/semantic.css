@@ -13234,12 +13234,12 @@ ol.ui.list ol li,
 --------------------*/
 
 .ui.animated.list > .item {
-  -webkit-transition: 0.25s color ease 0.1s, 0.25s padding-left ease 0.1s, 0.25s background-color ease 0.1s;
-  transition: 0.25s color ease 0.1s, 0.25s padding-left ease 0.1s, 0.25s background-color ease 0.1s;
+  -webkit-transition: 0.01s color ease 0.01s, 0.01s padding-left ease 0.01s, 0.01s background-color ease 0.01s;
+  transition: 0.01s color ease 0.01s, 0.01s padding-left ease 0.01s, 0.01s background-color ease 0.01s;
 }
 
 .ui.animated.list:not(.horizontal) > .item:hover {
-  padding-left: 1em;
+  padding-left: 1.5em;
 }
 
 /*-------------------
@@ -19988,7 +19988,7 @@ ol.ui.horizontal.list li:before,
   display: inline-block;
   vertical-align: middle;
   margin: -0.3em 0em;
-  width: 2.5em;
+  width: 5.5em;
 }
 
 .ui.vertical.menu .item > img:not(.ui):only-child {
@@ -35215,3 +35215,33 @@ html.ios body {
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.red.ribbon.label {
+    border-color: #00827c !important;
+}
+
+.ui.red.labels .label, .ui.red.label {
+    background-color: #15363E !important;
+    border-color: #2A676D !important;
+    color: #ffffff !important;
+}
+
+.ui.teal.ribbon.label {
+    border-color: #00827c !important;
+}
+.ui.teal.labels .label, .ui.teal.label {
+    background-color: #237A8B !important;
+    border-color: #00b5ad !important;
+    color: #ffffff !important;
+}
+
+.ui.red.buttons .button, .ui.red.button {
+    background-color: #15373F;
+    color: #ffffff;
+    text-shadow: none;
+    background-image: none;
+}
+
+.ui.segment {
+    border: 1px solid rgb(15, 41, 49);
+}

@@ -34,7 +34,7 @@
 							</h3>
 						</div>
 
-						</br>
+						</br></br>
 
 						<div class="description">
 
@@ -613,30 +613,79 @@
 							</div>
 
 							<h3>
-								<small>Journey Overview</small>
+								<small>Journey Overview</small> 
 							</h3>
-
-							<div class="ui left floated small brown basic label">
-								Vehicle ID :
-								${vehicleInstance?.identifier}
+														
+							<g:if test="${journey?.averageRPM >= 3500}">
+							<div class="ui left floated small red basic label">
+								Average RPM : 
+								${journey?.averageRPM} rpm
 							</div>
+							</g:if>
+							
+							<g:if test="${journey?.averageRPM < 3500}">
 							<div class="ui left floated small green basic label">
-								${vehicleInstance?.engineSize}L
-								${vehicleInstance?.engineConfiguration}
-								${vehicleInstance?.cylinders}
-								Cylinder Engine
+								Average RPM : 
+								${journey?.averageRPM} rpm
 							</div>
+							</g:if>
+							
+							<g:if test="${journey?.heavyAccelerationCount >= 1}">
+							<div class="ui left floated small red basic label">
+								Heavy Acceleration : 
+								${journey?.heavyAccelerationCount}
+							</div>
+							</g:if>
+							
+							<g:if test="${journey?.heavyAccelerationCount == 0}">
 							<div class="ui left floated small green basic label">
-								${vehicleInstance?.transmissionType}
-								Gearbox
+								Heavy Acceleration : 
+								${journey?.heavyAccelerationCount} 
 							</div>
+							</g:if>
+							
+							<g:if test="${journey?.heavyBrakingCount >= 1}">
+							<div class="ui left floated small red basic label">
+								Heavy Braking : 
+								${journey?.heavyBrakingCount}
+							</div>
+							</g:if>
+							
+							<g:if test="${journey?.heavyBrakingCount == 0}">
 							<div class="ui left floated small green basic label">
-								${vehicleInstance?.vehicleStyle}
-								(${vehicleInstance?.vehicleClass})
+								Heavy Braking : 
+								${journey?.heavyBrakingCount} 
 							</div>
+							</g:if>
+							
+							<g:if test="${journey?.averagePercentageIdle >= 10}">
+							<div class="ui left floated small red basic label">
+								Idle Percentage : 
+								${journey?.averagePercentageIdle} %
+							</div>
+							</g:if>
+							
+							<g:if test="${journey?.averagePercentageIdle < 10}">
 							<div class="ui left floated small green basic label">
-								${vehicleInstance?.fuelType}
+								Idle Percentage : 
+								${journey?.averagePercentageIdle} %
 							</div>
+							</g:if>
+							
+							
+							<g:if test="${journey?.averageEngineLoad >= 90}">
+							<div class="ui left floated small red basic label">
+								Engine Load Percentage : 
+								${journey?.averageEngineLoad} %
+							</div>
+							</g:if>
+							
+							<g:if test="${journey?.averageEngineLoad < 90}">
+							<div class="ui left floated small green basic label">
+								Engine Load Percentage : 
+								${journey?.averageEngineLoad} %
+							</div>
+							</g:if>
 
 
 
@@ -644,24 +693,16 @@
 								class="ui right floated small red labeled icon button">
 								<i class="right arrow icon"></i>
 								View Journey
-									Data</g:link>
+									Statistics</g:link>
 
-							</br>
+							</br></br>
 						</div>
 					</g:each>
 				</div>
 			</g:if>
 
-			</br> </br>
-
-
-
-
+			</br>
 		</div>
-
-
-
-
 
 	</div>
 </body>

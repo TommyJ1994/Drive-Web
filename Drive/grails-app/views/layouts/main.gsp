@@ -24,18 +24,23 @@
 <asset:javascript src="jsapi.js" />
 <g:layoutHead />
 </head>
-<body class="animated fadeIn">
+<body class="animated fadeIn" style="background-color: #2B2C2F;">
 
-	<div class="ui inverted primary fixed menu" style="background-color: #0F2931">
+	<div class="ui inverted primary fixed menu" style="background-color: #2B2C2F;border-bottom: 1px solid;border-bottom-color: #1AB370;">
 		<div class="item">
-			<asset:image src="logo-white-small.png" alt="Grails" />
+			<asset:image src="logo-dark.png" alt="Grails" />
 		</div>
 		<a href="/Drive" class="item"> <i class="dashboard icon"></i> Dashboard </a> <a class="item">
 			<i class="rocket icon"></i> Features </a> <a class="item"><i class="help icon"></i> Getting Started </a>
 		<g:link class="item" controller="vehicle" action="manufacturers"><i class="car icon"></i> Manufacturers</g:link>
-		<a class="item"> Vehicle Classes </a> <a class="item"> Fuel Classes </a> <a class="item"> Countries </a> 
+		<g:link class="item" controller="vehicle" action="styles"><i class="wizard icon"></i> Vehicle Styles</g:link> 
+		<g:link class="item" controller="vehicle" action="engineSizes"><i class="book icon"></i> Engine Sizes</g:link> 
+		<g:link class="item" controller="vehicle" action="transmissions"><i class="sitemap icon"></i> Transmission</g:link> 
+		<g:link class="item" controller="vehicle" action="fuelTypes"><i class="leaf icon"></i> Fuel Types</g:link> 
+		<g:link class="item" controller="vehicle" action="countries"><i class="marker icon"></i> Countries</g:link>
+		<g:link class="item" controller="vehicle" action="genders"><i class="male icon"></i> Genders</g:link>  
 		<div class="right menu">
-			<a class="item" style="background: rgb(64, 151, 155);"><i class="android icon"></i> Download App </a>
+			<a class="item" style="background: #1AB370;"><i class="android icon"></i> Download App </a>
 			<div class="item">
 				<div class="ui icon input">
 					<i class="search link icon"></i>
@@ -53,7 +58,7 @@
 		</br></br></br></br></br></br>
 	<div align="center" class="footer ui container">
 		<div align="center" class="item image ui micro small">
-			<asset:image src="logo-white-small.png" alt="Grails" />
+			<asset:image src="logo-dark.png" alt="Grails" />
 			<h5 style="color: #fff">The Open Car Network</h5>
 		</div>
 	</div>

@@ -23,14 +23,6 @@ class ApiController {
 	// Allowed Methods to Interact with Resources
 	static allowedMethods = [getVehicleInfo: "POST", addNewJourney: "POST", addNewVehicle: "POST", delete: "DELETE"]
 
-	/**
-	 * This method will return related data for a particular car
-	 * @param vehicleID - the vehicle id of the car
-	 */
-	def getVehicleInfo(String vehicleID) {
-		def data = request.JSON
-		respond Vehicle.findByIdentifier(data.id)
-	}
 
 	/**
 	 * This method adds a new driver and a vehicle to the database based on the data sent from the phone.
@@ -163,7 +155,60 @@ class ApiController {
 	}
 
 	/**
-	 * Receives journey data from the phone and adds it to the database 
+	 * This method returns data about a specific car based on the identifier.
+	 * @param vehicleID - The id of the car to fetch the data for.
+	 */
+	def getVehicleInfo(String vehicleID) {
+		def criteria = Vehicle.createCriteria()
+		def vehicleInstance = criteria.list() {
+			projections {
+				eq("identifier", params.id)
+			}
+		}
+		respond vehicleInstance[0]
+	}
+
+	/**
+	 * This method returns statistics about a specific car based on the identifier.
+	 * @param vehicleID - The id of the car to fetch the data for.
+	 */
+	def getVehicleStatistics(String vehicleID) {
+		def criteria = Vehicle.createCriteria()
+		def vehicleInstance = criteria.list() {
+			projections {
+				eq("identifier", params.id)
+			}
+		}
+		respond vehicleInstance[0].overallStatistics
+	}
+
+	/**
+	 * This method returns journeys for a specific car based on the identifier.
+	 * @param vehicleID - The id of the car to fetch the data for.
+	 */
+	def getVehicleJourneys(String vehicleID) {
+		def criteria = Vehicle.createCriteria()
+		def vehicleInstance = criteria.list() {
+			projections {
+				eq("identifier", params.id)
+			}
+		}
+		respond vehicleInstance[0].journeys.sort{it.startTime}.reverse()
+	}
+
+	/**
+	 * This method returns journey data for a specific journey based on the ID.
+	 * @param journeyID - The id of the journey to fetch the data for.
+	 */
+	def getJourneyData(String journeyID)
+	{
+		def journeyInstance = Journey.get(params.id)
+
+		respond journeyInstance
+	}
+
+	/**
+	 * Receives journey data from the phone and adds it to the database.
 	 * after the data manipulation has been carried out by the journey data manipulation service.
 	 * Statistics are also generated using the statistics generator service.
 	 */
@@ -175,7 +220,7 @@ class ApiController {
 		// The ID of vehicle to which the journey data belongs
 		def vehicle = Vehicle.findByIdentifier(data.vehicleID);
 
-		// create new groovy date for the journey starting time using date data from the phone
+		// create new groovy date for the journey starting time using date data from the phone.
 		def startTime = new Date().copyWith(
 				year: data.startTime.year,
 				month: data.startTime.month,

@@ -38,7 +38,7 @@
 
 						<div class="description">
 
-							<div class="ui animated selection list">
+							<div class="ui animated list">
 
 								<div class="item">
 									<asset:image src="user.png" class="ui avatar image" />
@@ -132,7 +132,7 @@
 										<asset:image src="car4.png" class="ui avatar image" />
 										<div class="content">
 											<div class="header">
-												<div class="ui selection list">
+												<div class="ui list">
 													<g:each in="${vehicleInstance.features}" var="j">
 														<div class="item header">
 															${j}

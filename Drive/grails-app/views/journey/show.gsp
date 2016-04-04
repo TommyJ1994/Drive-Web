@@ -40,7 +40,7 @@
 
 						<div class="description">
 
-							<div class="ui animated selection list">
+							<div class="ui animated list">
 
 								<div class="item">
 									<asset:image src="user.png" class="ui avatar image" />
@@ -481,7 +481,7 @@
 										maxFractionDigits="0" />
 									%
 								</div>
-								Average Percentage Idle
+								Percentage Idle
 							</div>
 						</div>
 						<div class="item">
@@ -528,7 +528,7 @@
 										maxFractionDigits="0" />
 									%
 								</div>
-								Average Percentage Coasting
+								Percentage Coasting
 							</div>
 						</div>
 
@@ -593,6 +593,135 @@
 				def ageColumns = [['string', 'Age'], ['number', 'Number']]
 			%>
 
+			<div class="ui red ribbon label">
+						<h3>Quick Links</h3>
+					</div>
+					</br> </br>
+
+<div class="ui grid" align="center">
+
+						<div class="three wide column">
+							<div class="ui card">
+								<div class="ui medium rounded image">
+									<asset:image src="chart-categories/engine.jpg"
+										class="ui medium bordered image" height="200" width="200" />
+								</div>
+
+								<div class="content">
+									<a class="header">
+										<h1 class="ui header" style="font-size: 1rem;">
+											Engine
+										</h1>
+									</a>
+								</div>
+								<a href="#engine"
+									class="ui bottom attached button"
+									style="background: #19B26F;color: rgb(254, 254, 254);">
+									<i class="search icon"></i>
+						      View Charts
+						    	</a>
+							</div>
+						</div>
+
+
+
+						<div class="three wide column">
+							<div class="ui card">
+								<div class="ui medium rounded image">
+									<asset:image src="chart-categories/emissions.jpg"
+										class="ui medium bordered image" height="200" width="200" />
+								</div>
+
+								<div class="content">
+									<a class="header">
+										<h1 class="ui header" style="font-size: 1rem;">
+											Emissions System
+										</h1>
+									</a>
+								</div>
+								<a href="#emmisions"
+									class="ui bottom attached button"
+									style="background: #19B26F;color: rgb(254, 254, 254);">
+									<i class="search icon"></i>
+						      View Charts
+						    	</a>
+							</div>
+						</div>
+
+						<div class="three wide column">
+							<div class="ui card">
+								<div class="ui medium rounded image">
+									<asset:image src="chart-categories/fuel.jpg"
+										class="ui medium bordered image" height="200" width="200" />
+								</div>
+
+								<div class="content">
+									<a class="header">
+										<h1 class="ui header" style="font-size: 1rem;">
+											Fuel System
+										</h1>
+									</a>
+								</div>
+								<a href="#emmisions"
+									class="ui bottom attached button"
+									style="background: #19B26F;color: rgb(254, 254, 254);">
+									<i class="search icon"></i>
+						      View Charts
+						    	</a>
+							</div>
+						</div>
+
+						<div class="three wide column">
+							<div class="ui card">
+								<div class="ui medium rounded image">
+									<asset:image src="chart-categories/pedal.jpg"
+										class="ui medium bordered image" height="200" width="200" />
+								</div>
+
+								<div class="content">
+									<a class="header">
+										<h1 class="ui header" style="font-size: 1rem;">
+											Pedal/Throttle
+										</h1>
+									</a>
+								</div>
+								<a href="#throttle"
+									class="ui bottom attached button"
+									style="background: #19B26F;color: rgb(254, 254, 254);">
+									<i class="search icon"></i>
+						      View Charts
+						    	</a>
+							</div>
+						</div>
+
+						<div class="three wide column">
+							<div class="ui card">
+								<div class="ui medium rounded image">
+									<asset:image src="chart-categories/intake.jpg"
+										class="ui medium bordered image" height="200" width="200" />
+								</div>
+
+								<div class="content">
+									<a class="header">
+										<h1 class="ui header" style="font-size: 1rem;">
+											Intake System
+										</h1>
+									</a>
+								</div>
+								<a href="#intake"
+									class="ui bottom attached button"
+									style="background: #19B26F;color: rgb(254, 254, 254);">
+									<i class="search icon"></i>
+						      View Charts
+						    	</a>
+							</div>
+						</div>
+
+
+
+			</div>
+
+			<div id="engine"></div>
 
 			<div class="ui equal width grid">
 				<div class="column">
@@ -603,56 +732,56 @@
 
 					<g:if test="${engineData != null}">
 					<a class="ui teal ribbon label">Calculated Engine Load, Vehicle Speed, Throttle Position</a> 
-					<gvisualization:motionChart  elementId="engineDataChart" width="${1080}"
+					<gvisualization:motionChart dynamicLoading="${true}"  elementId="engineDataChart" width="${1080}"
 						height="${600}" columns="${engineColumns}" data="${engineData}"/>
 					<div id="engineDataChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${engineRPM?.points != null && engineRPM?.points.size() > 0}">
 					<a class="ui teal ribbon label">${engineRPM?.name}</a> 
-					<gvisualization:steppedAreaCoreChart  elementId="engineRPMChart" width="${1080}"
+					<gvisualization:steppedAreaCoreChart dynamicLoading="${true}"  elementId="engineRPMChart" width="${1080}"
 						height="${600}" columns="${engineRPMColumns}" data="${engineRPM?.points}"/>
 					<div id="engineRPMChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${engineCoolantTemperature?.points != null && engineCoolantTemperature?.points.size() > 0}">
 					<a class="ui teal ribbon label">${engineCoolantTemperature?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="engineCoolantTemperatureChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="engineCoolantTemperatureChart" width="${1080}"
 						height="${600}" columns="${engineCoolantTemperatureColumns}" data="${engineCoolantTemperature?.points}"/>
 					<div id="engineCoolantTemperatureChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${engineOilTemperature?.points != null && engineOilTemperature?.points.size() > 0}">
 					<a class="ui teal ribbon label">${engineOilTemperature?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="engineOilTemperatureChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}" dynamicLoading="${true}" dynamicLoading="${true}"  elementId="engineOilTemperatureChart" width="${1080}"
 						height="${600}" columns="${engineOilTemperatureColumns}" data="${engineOilTemperature?.points}"/>
 					<div id="engineOilTemperatureChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${absoluteloadValue?.points != null && absoluteloadValue?.points.size() > 0}">
 					<a class="ui teal ribbon label">${absoluteloadValue?.name}</a> 
-					<gvisualization:steppedAreaCoreChart  elementId="absoluteloadValueChart" width="${1080}"
+					<gvisualization:steppedAreaCoreChart dynamicLoading="${true}"  elementId="absoluteloadValueChart" width="${1080}"
 						height="${600}" columns="${absoluteloadValueColumns}" data="${absoluteloadValue?.points}"/>
 					<div id="absoluteloadValueChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${driversDemandEngineTorque?.points != null && driversDemandEngineTorque?.points.size() > 0}">
 					<a class="ui teal ribbon label">${driversDemandEngineTorque?.name}</a> 
-					<gvisualization:steppedAreaCoreChart  elementId="driversDemandEngineTorqueChart" width="${1080}"
+					<gvisualization:steppedAreaCoreChart dynamicLoading="${true}"  elementId="driversDemandEngineTorqueChart" width="${1080}"
 						height="${600}" columns="${driversDemandEngineTorqueColumns}" data="${driversDemandEngineTorque?.points}"/>
 					<div id="driversDemandEngineTorqueChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${actualEngineTorque?.points != null && actualEngineTorque?.points.size() > 0}">
 					<a class="ui teal ribbon label">${actualEngineTorque?.name}</a> 
-					<gvisualization:steppedAreaCoreChart  elementId="actualEngineTorqueChart" width="${1080}"
+					<gvisualization:steppedAreaCoreChart dynamicLoading="${true}"  elementId="actualEngineTorqueChart" width="${1080}"
 						height="${600}" columns="${actualEngineTorqueColumns}" data="${actualEngineTorque?.points}"/>
 					<div id="actualEngineTorqueChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${engineReferenceTorque?.points != null && engineReferenceTorque?.points.size() > 0}">
 					<a class="ui teal ribbon label">${engineReferenceTorque?.name}</a> 
-					<gvisualization:steppedAreaCoreChart  elementId="engineReferenceTorqueChart" width="${1080}"
+					<gvisualization:steppedAreaCoreChart dynamicLoading="${true}"  elementId="engineReferenceTorqueChart" width="${1080}"
 						height="${600}" columns="${engineReferenceTorqueColumns}" data="${engineReferenceTorque?.points}"/>
 					<div id="engineReferenceTorqueChart"></div>
 					</g:if>
@@ -662,7 +791,7 @@
 			</div>
 			</br> </br>
 
-			
+				<div id="emmisions"></div>
 					<div class="ui red ribbon label">
 						<h3>Emissions System</h3>
 					</div>
@@ -670,14 +799,14 @@
 					
 					<g:if test="${lambdaData[1] != null && lambdaData[2] != null && lambdaData[1].size() > 0 && lambdaData[2].size() > 0}">
 					<a class="ui teal ribbon label">Upstream & Downstream Oxygen (Lambda) Sensors</a>
-					<gvisualization:scatterCoreChart  elementId="lambdaChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="lambdaChart" width="${1080}"
 						height="${600}" columns="${lambdaColumns}" data="${lambdaData}" aggregationTarget="${'category'}" />
 					<div id="lambdaChart"></div>
 					</g:if></br> </br>
 					
 					<g:if test="${catalystTemperatureBank1Sensor1?.points != null && catalystTemperatureBank1Sensor1?.points.size() > 0}">
 					<a class="ui teal ribbon label">${catalystTemperatureBank1Sensor1?.name}</a>
-					<gvisualization:scatterCoreChart  elementId="catalystTemperatureBank1Sensor1Chart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="catalystTemperatureBank1Sensor1Chart" width="${1080}"
 						height="${600}" columns="${catalystTemperatureBank1Sensor2Columns}" data="${catalystTemperatureBank1Sensor1?.points}"/>
 					<div id="catalystTemperatureBank1Sensor1Chart"></div>
 					</g:if></br> </br>
@@ -685,7 +814,7 @@
 					
 					<g:if test="${catalystTemperatureBank1Sensor2?.points != null && catalystTemperatureBank1Sensor2?.points.size() > 0}">
 					<a class="ui teal ribbon label">${catalystTemperatureBank1Sensor2?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="catalystTemperatureBank1Sensor2Chart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="catalystTemperatureBank1Sensor2Chart" width="${1080}"
 						height="${600}" columns="${catalystTemperatureBank1Sensor1Columns}" data="${catalystTemperatureBank1Sensor2?.points}"/>
 					<div id="catalystTemperatureBank1Sensor2Chart"></div>
 					</g:if></br> </br>
@@ -693,7 +822,7 @@
 
 					<g:if test="${catalystTemperatureBank2Sensor1?.points != null && catalystTemperatureBank2Sensor1?.points.size() > 0}">
 					<a class="ui teal ribbon label">${catalystTemperatureBank2Sensor1?.name}</a>
-					<gvisualization:scatterCoreChart  elementId="catalystTemperatureBank2Sensor1Chart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="catalystTemperatureBank2Sensor1Chart" width="${1080}"
 						height="${600}" columns="${catalystTemperatureBank2Sensor1Columns}" data="${catalystTemperatureBank2Sensor1?.points}"/>
 					<div id="catalystTemperatureBank2Sensor1Chart"></div>
 					</g:if></br> </br>
@@ -701,13 +830,14 @@
 					
 					<g:if test="${catalystTemperatureBank2Sensor2?.points != null && catalystTemperatureBank2Sensor2?.points.size() > 0}">
 					<a class="ui teal ribbon label">${catalystTemperatureBank2Sensor2?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="catalystTemperatureBank2Sensor2Chart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="catalystTemperatureBank2Sensor2Chart" width="${1080}"
 						height="${600}" columns="${catalystTemperatureBank2Sensor2Columns}" data="${catalystTemperatureBank2Sensor2?.points}"/>
 					<div id="catalystTemperatureBank2Sensor2Chart"></div>
 					</g:if></br> </br>
 
 					
-			
+			<div id="fuel"></div>
+
 			<div class="ui equal width grid">
 				<div class="column">
 					<div class="ui red ribbon label">
@@ -717,21 +847,21 @@
 
 					<g:if test="${fuelPressure?.points != null && fuelPressure?.points.size() > 0}">
 					<a class="ui teal ribbon label">${fuelPressure?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="fuelPressureChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="fuelPressureChart" width="${1080}"
 						height="${600}" columns="${fuelPressureColumns}" data="${fuelPressure?.points}"/>
 					<div id="fuelPressureChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${fuelInjectionTiming?.points != null && fuelInjectionTiming?.points.size() > 0}">
 					<a class="ui teal ribbon label">${fuelInjectionTiming?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="fuelInjectionTimingChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="fuelInjectionTimingChart" width="${1080}"
 						height="${600}" columns="${fuelInjectionTimingColumns}" data="${fuelInjectionTiming?.points}"/>
 					<div id="fuelInjectionTimingChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${engineFuelRate?.points != null && engineFuelRate?.points.size() > 0}">
 					<a class="ui teal ribbon label">${engineFuelRate?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="engineFuelRateChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="engineFuelRateChart" width="${1080}"
 						height="${600}" columns="${engineFuelRateColumns}" data="${engineFuelRate?.points}"/>
 					<div id="engineFuelRateChart"></div>
 					</g:if></br> </br>
@@ -739,6 +869,8 @@
 					
 				</div>
 			</div></br> </br>
+
+			<div id="throttle"></div>
 
 			<div class="ui equal width grid">
 				<div class="column">
@@ -749,21 +881,21 @@
 
 					<g:if test="${relativeThrottlePosition?.points != null && relativeThrottlePosition?.points?.size() > 0}">
 					<a class="ui teal ribbon label">${relativeThrottlePosition?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="relativeThrottlePositionChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="relativeThrottlePositionChart" width="${1080}"
 						height="${600}" columns="${relativeThrottlePositionColumns}" data="${relativeThrottlePosition?.points}"/>
 					<div id="relativeThrottlePositionChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${commandedThrottleActuator?.points != null && commandedThrottleActuator?.points?.size() > 0}">
 					<a class="ui teal ribbon label">${commandedThrottleActuator?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="commandedThrottleActuatorChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="commandedThrottleActuatorChart" width="${1080}"
 						height="${600}" columns="${commandedThrottleActuatorColumns}" data="${commandedThrottleActuator?.points}"/>
 					<div id="commandedThrottleActuatorChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${relativeAcceleratorPedalPosition?.points != null && relativeAcceleratorPedalPosition?.points?.size() > 0}">
 					<a class="ui teal ribbon label">${relativeAcceleratorPedalPosition?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="relativeAcceleratorPedalPositionChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="relativeAcceleratorPedalPositionChart" width="${1080}"
 						height="${600}" columns="${relativeAcceleratorPedalPositionColumns}" data="${relativeAcceleratorPedalPosition?.points}"/>
 					<div id="relativeAcceleratorPedalPositionChart"></div>
 					</g:if></br> </br>
@@ -771,6 +903,8 @@
 					
 				</div>
 			</div></br> </br>
+
+			<div id="intake"></div>
 
 			<div class="ui equal width grid">
 				<div class="column">
@@ -781,35 +915,35 @@
 
 					<g:if test="${intakeManifoldAbsolutePressure?.points != null && intakeManifoldAbsolutePressure?.points?.size() > 0}">
 					<a class="ui teal ribbon label">${intakeManifoldAbsolutePressure?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="intakeManifoldAbsolutePressureChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="intakeManifoldAbsolutePressureChart" width="${1080}"
 						height="${600}" columns="${intakeManifoldAbsolutePressureColumns}" data="${intakeManifoldAbsolutePressure?.points}"/>
 					<div id="intakeManifoldAbsolutePressureChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${intakeAirTemperature?.points != null && intakeAirTemperature?.points?.size() > 0}">
 					<a class="ui teal ribbon label">${intakeAirTemperature?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="intakeAirTemperatureChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="intakeAirTemperatureChart" width="${1080}"
 						height="${600}" columns="${intakeAirTemperatureColumns}" data="${intakeAirTemperature?.points}"/>
 					<div id="intakeAirTemperatureChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${mafAirFlowRate?.points != null && mafAirFlowRate?.points?.size() > 0}">
 					<a class="ui teal ribbon label">${mafAirFlowRate?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="mafAirFlowRateChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="mafAirFlowRateChart" width="${1080}"
 						height="${600}" columns="${mafAirFlowRateColumns}" data="${mafAirFlowRate?.points}"/>
 					<div id="mafAirFlowRateChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${barometricPressure?.points != null && barometricPressure?.points?.size() > 0}">
 					<a class="ui teal ribbon label">${barometricPressure?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="barometricPressureChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="barometricPressureChart" width="${1080}"
 						height="${600}" columns="${barometricPressureColumns}" data="${barometricPressure?.points}"/>
 					<div id="barometricPressureChart"></div>
 					</g:if></br> </br>
 
 					<g:if test="${ambientAirTemperature?.points != null && ambientAirTemperature?.points?.size() > 0}">
 					<a class="ui teal ribbon label">${ambientAirTemperature?.name}</a> 
-					<gvisualization:scatterCoreChart  elementId="ambientAirTemperatureChart" width="${1080}"
+					<gvisualization:scatterCoreChart dynamicLoading="${true}"  elementId="ambientAirTemperatureChart" width="${1080}"
 						height="${600}" columns="${ambientAirTemperatureColumns}" data="${ambientAirTemperature?.points}"/>
 					<div id="ambientAirTemperatureChart"></div>
 					</g:if></br> </br>

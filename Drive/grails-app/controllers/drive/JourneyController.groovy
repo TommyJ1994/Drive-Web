@@ -172,6 +172,8 @@ class JourneyController {
 					println ""
 			}
 		}
+
+		println "Sorting Done" + new Date()
 		
 		def engineDataSensors = [calculatedEngineLoad, throttlePosition, vehicleSpeed]
 		def smallestDataset = engineDataSensors[0];
@@ -196,7 +198,7 @@ class JourneyController {
 			engineData << ["Throttle Position (%)", x, 800, throttlePositionPoint]
 		}
 			
-			
+			println "Engine Data Done" + new Date()
 			
 			def lambdaData = []
 			
@@ -220,6 +222,8 @@ class JourneyController {
 					lambdaData << ["Point", oxygen1Point, oxygen2Point]
 				}
 			}
+
+			println "All Done" + new Date()
 						
 		respond journeyInstance, model:[calculatedEngineLoad : calculatedEngineLoad,
 		engineCoolantTemperature: engineCoolantTemperature,

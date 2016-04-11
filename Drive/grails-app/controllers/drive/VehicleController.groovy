@@ -424,7 +424,7 @@ class VehicleController {
 				eq("identifier", params.id)
 			}
 		}
-		
+				
 		if(vehicleInstance[0] == null)
 		{
 			render(view:'/404')

@@ -20,10 +20,6 @@ class ApiController {
 	// Data Response Formats
 	static responseFormats = ['json', 'xml']
 
-	// Allowed Methods to Interact with Resources
-	static allowedMethods = [getVehicleInfo: "POST", addNewJourney: "POST", addNewVehicle: "POST", delete: "DELETE"]
-
-
 	/**
 	 * This method adds a new driver and a vehicle to the database based on the data sent from the phone.
 	 * @param properties - The Driver/Vehicle data sent from the phone in JSON format
@@ -33,32 +29,31 @@ class ApiController {
 	{
 		// Collects the JSON data sent from the phone
 		def data = request.JSON
-
+				
 		// Picking out Driver information and car data
 		def gender = data.gender;
 		def country = data.country;
 		def carData = data.carData;
 		
-		
-		def dateOfBirth = new Date().copyWith(
-			year: data.dateOfBirth.year,
-			month: data.dateOfBirth.month,
-			dayOfMonth: data.dateOfBirth.dayOfMonth,
-			hourOfDay: 1,
-			minute: 1,
-			second: 1)
-		
-		def year = data.dateOfBirth.year.toString()
-
-		// Generate a new ID for the vehicle. This ID will be globally unique.
-		String id = vehicleService.generateUniqueID();
-
 		// Check if some of the key attributes are null
-		if (dateOfBirth == null || gender == null || country == null || year == null || carData.model.name== null || carData.make.name == null || carData.year.year == null) {
+		if (data.dateOfBirth == null || gender == null || country == null || !(gender instanceof String) || !(country instanceof String) || !data.dateOfBirth.year.toString().isInteger() || carData.model.name== null || carData.make.name == null || carData.year.year == null) {
 			// Send 405 if any of the key data is null
 			respond status: NOT_ACCEPTABLE
 			return
 		}
+		
+		def dateOfBirth = new Date().copyWith(
+			year: data.dateOfBirth?.year,
+			month: data.dateOfBirth?.month,
+			dayOfMonth: data.dateOfBirth?.dayOfMonth,
+			hourOfDay: 1,
+			minute: 1,
+			second: 1)
+		
+		def year = data.dateOfBirth?.year?.toString()
+
+		// Generate a new ID for the vehicle. This ID will be globally unique.
+		String id = vehicleService.generateUniqueID();
 
 		// Create a new driver and save them to the database
 		def driver = new Driver("gender": gender, "dateOfBirth": dateOfBirth, "country": country, "year": year)
@@ -216,10 +211,10 @@ class ApiController {
 	def addNewJourney(String dataFromPhone)
 	{
 		def data = request.JSON
-
+				
 		// The ID of vehicle to which the journey data belongs
 		def vehicle = Vehicle.findByIdentifier(data.vehicleID);
-
+				
 		// create new groovy date for the journey starting time using date data from the phone.
 		def startTime = new Date().copyWith(
 				year: data.startTime.year,
@@ -275,7 +270,8 @@ class ApiController {
 			"Engine Fuel Rate",
 			"Drivers Demand Engine Torque",
 			"Actual Engine Torque",
-			"Engine Reference Torque"
+			"Engine Reference Torque",
+			"Diagnostic Trouble Codes"
 		];
 
 		// List of human readable sensor descriptions
@@ -306,7 +302,8 @@ class ApiController {
 			"The amount of fuel consumed by the engine per unit of time in liters per hour.",
 			"The requested torque output of the engine by the driver.",
 			"The calculated output torque of the engine.",
-			"The engine reference torque value. This value does not change."
+			"The engine reference torque value. This value does not change.",
+			"Diagnostic Trouble Codes"
 		];
 
 		int count = 0;
@@ -338,7 +335,7 @@ class ApiController {
 		def engineLoadSamples = result.statistics[19]
 		def mpgSamples = result.statistics[20]
 		def throttleSamples = result.statistics[21]
-
+		
 		def newJourney = new Journey("sensors": sensorList,
 		"startTime": startTime,
 		"endTime": endTime,

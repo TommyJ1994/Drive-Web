@@ -168,8 +168,8 @@ class StatisticsGeneratorService {
 
 		for(int i = 0; i < speedData.size(); i++) {
 			if(speedData[i+1] != null) {
-				int acceleration = ((speedData[i] - speedData[i+1]) * 1.47)/1
-				int gForce = acceleration/32.174
+				double acceleration = ((speedData[i] - speedData[i+1]) * 1.47)/1
+				double gForce = acceleration/32.174
 
 				if(gForce < 0) {
 					gForce = Math.abs(gForce) // get positive g force value
@@ -177,7 +177,7 @@ class StatisticsGeneratorService {
 				sum += gForce
 			}
 		}
-		return Math.round((sum / speedData.size()) * 100.0)/100.0;
+		return (double)Math.round(sum / speedData.size() * 10d) / 10d
 	}
 
 	/**
@@ -189,16 +189,16 @@ class StatisticsGeneratorService {
 
 		for(int i = 0; i < speedData.size(); i++) {
 			if(speedData[i+1] != null && speedData[i+1] > speedData[i]) {
-				int acceleration = ((speedData[i] - speedData[i+1]) * 1.47)/1
-				int gForce = acceleration/32.174
+				double acceleration = ((speedData[i] - speedData[i+1]) * 1.47)/1
+				double gForce = acceleration/32.174
 
 				if(gForce > topGforce) {
 					topGforce = gForce 
 				}
 			}
 		}
-
-		return topGforce
+		
+		return (double)Math.round(topGforce * 10d) / 10d
 	}
 	
 	/**
@@ -210,8 +210,8 @@ class StatisticsGeneratorService {
 
 		for(int i = 0; i < speedData.size(); i++) {
 			if(speedData[i+1] != null && speedData[i+1] < speedData[i]) {
-				int acceleration = ((speedData[i] - speedData[i+1]) * 1.47)/1
-				int gForce = acceleration/32.174
+				double acceleration = ((speedData[i] - speedData[i+1]) * 1.47)/1
+				double gForce = acceleration/32.174
 				gForce = Math.abs(gForce) // get positive g force value
 
 				if(gForce > topGforce) {
@@ -220,7 +220,7 @@ class StatisticsGeneratorService {
 			}
 		}
 
-		return topGforce
+		return (double)Math.round(topGforce * 10d) / 10d
 	}
 
 	/**

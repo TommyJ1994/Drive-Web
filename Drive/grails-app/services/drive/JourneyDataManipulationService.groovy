@@ -10,7 +10,6 @@ class JourneyDataManipulationService {
 
 	def statisticsGeneratorService
 
-
 	/**
 	 * This method will receive the journey data from the API controller
 	 */
@@ -45,6 +44,7 @@ class JourneyDataManipulationService {
 		def driversDemandEngineTorque = [];
 		def actualEngineTorque = [];
 		def engineReferenceTorque = [];
+		def diagnosticTroubleCodes = [];
 	
 		// statistics fields
 		def topSpeed = 0
@@ -190,6 +190,15 @@ class JourneyDataManipulationService {
 				case "4163":
 					engineReferenceTorque << point.substring(point.length() - 4)
 					break
+				// Single Diagnostic Trouble Code
+				case "4301":
+					diagnosticTroubleCodes << point.substring(point.length() - 4)
+					break
+				// Double Diagnostic Trouble Codes
+				case "4302":
+					diagnosticTroubleCodes << point.substring(point.length() - 8)
+					point.substring(point.length()-8, point.length()-4)
+					break
 				default:
 					println ""
 			}
@@ -224,7 +233,7 @@ class JourneyDataManipulationService {
 		def driversDemandEngineTorqueDecoded = decodeDriversDemandEngineTorque(driversDemandEngineTorque)
 		def actualEngineTorqueDecoded = decodeActualEngineTorque(actualEngineTorque)
 		def engineReferenceTorqueDecoded = decodeEngineReferenceTorque(engineReferenceTorque)
-
+		def diagnosticTroubleCodesDecoded = decodeDiagnosticTroubleCodes(diagnosticTroubleCodes)
 
 		// Generate statistics for the journey
 		
@@ -309,7 +318,8 @@ class JourneyDataManipulationService {
 			engineFuelRateDecoded,
 			driversDemandEngineTorqueDecoded,
 			actualEngineTorqueDecoded,
-			engineReferenceTorqueDecoded
+			engineReferenceTorqueDecoded,
+			diagnosticTroubleCodesDecoded
 		]
 		
 
@@ -339,12 +349,30 @@ class JourneyDataManipulationService {
 			throttleSamples
 		]
 		
-		
-		
-		
 		// return data to the controller for validation and storage in the database
 		return ["sensors": sensors, "statistics": statistics]
 	}
+	
+	
+	/**
+	 * Interpreting of engine diagnostic codes.
+	 * @param DtcList - the list of diagnostic trouble codes.
+	 */
+	def decodeDiagnosticTroubleCodes(def DtcList)
+	{
+		def decodedList = []
+		
+		if(DtcList != null && DtcList.size > 0)
+		{
+			for(int i = 0; i < DtcList.size(); i++)
+			{
+				def code = "P" + DtcList[i]
+				decodedList << code
+			}
+		}
+	return decodedList
+	}
+	
 	
 	/**
 	 * Conversion for the calculated engine load.

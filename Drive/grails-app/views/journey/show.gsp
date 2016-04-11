@@ -303,7 +303,7 @@
 										<asset:image src="gear.png" class="ui avatar image" />
 										<div class="content">
 											<div class="header">
-												${journeyInstance?.vehicle?.vehicle?.transmissionType}
+												${journeyInstance?.vehicle?.transmissionType}
 											</div>
 											Transmission Type
 										</div>

@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title><g:layoutTitle default="Grails" /></title>
+<title><g:layoutTitle default="Drive" /></title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" href="${assetPath(src: 'favicon.ico')}"
 	type="image/x-icon">
@@ -22,6 +22,7 @@
 <asset:stylesheet src="icon.css" />
 <asset:javascript src="semantic.js" />
 <asset:javascript src="jsapi.js" />
+<meta name="theme-color" content="#1AB370" />
 <g:layoutHead />
 </head>
 <body class="animated fadeIn" style="background-color: #2B2C2F;">
@@ -30,14 +31,14 @@
 		<div class="item">
 			<asset:image src="logo-dark.png" alt="Grails" />
 		</div>
-		<a href="/Drive" class="item"> <i class="dashboard icon"></i> Dashboard </a> <a class="item">
-			<i class="rocket icon"></i> Features </a> <a class="item"><i class="help icon"></i> Getting Started </a>
-		<g:link class="item" controller="vehicle" action="manufacturers"><i class="car icon"></i> Manufacturers</g:link>
+		<a href="/Drive" class="item"> <i class="dashboard icon"></i> Dashboard </a> 
+		<g:link class="item" controller="information" action="features"><i class="rocket icon"></i>  Features</g:link>
+		<g:link class="item" controller="information" action="guide"><i class="help icon"></i>  Getting Started</g:link>
 		<g:link class="item" controller="vehicle" action="styles"><i class="wizard icon"></i> Vehicle Styles</g:link> 
-		<g:link class="item" controller="vehicle" action="engineSizes"><i class="book icon"></i> Engine Sizes</g:link> 
-		<g:link class="item" controller="vehicle" action="transmissions"><i class="sitemap icon"></i> Transmission</g:link> 
-		<g:link class="item" controller="vehicle" action="fuelTypes"><i class="leaf icon"></i> Fuel Types</g:link> 
-		<g:link class="item" controller="vehicle" action="countries"><i class="marker icon"></i> Countries</g:link>
+		<g:link class="item" controller="vehicle" action="engineSizes"><i class="book icon"></i>  Engine Sizes</g:link> 
+		<g:link class="item" controller="vehicle" action="transmissions"><i class="sitemap icon"></i>  Transmission</g:link> 
+		<g:link class="item" controller="vehicle" action="fuelTypes"><i class="leaf icon"></i>  Fuel Types</g:link> 
+		<g:link class="item" controller="vehicle" action="countries"><i class="marker icon"></i>  Locations</g:link>
 		<g:link class="item" controller="vehicle" action="genders"><i class="male icon"></i> Genders</g:link>  
 		<div class="right menu">
 			<a class="item" style="background: #1AB370;"><i class="android icon"></i> Download App </a>
@@ -54,7 +55,9 @@
 	<div class="ui container responsive">
 	</br>
 		</br></br></br>
+		<div class="column">
 		<g:layoutBody />
+		</div>
 		</br></br></br></br></br></br>
 	<div align="center" class="footer ui container">
 		<div align="center" class="item image ui micro small">
@@ -62,6 +65,7 @@
 			<h5 style="color: #fff">The Open Car Network</h5>
 		</div>
 	</div>
+	</br>
 	</div>
 </body>
 </html>

@@ -38,7 +38,7 @@
 
 						<div class="description">
 
-							<div class="ui animated list">
+							<div class="ui animated selection list">
 
 								<div class="item">
 									<asset:image src="user.png" class="ui avatar image" />
@@ -586,6 +586,7 @@
 				<div class="ui animated divided list">
 					<g:each in="${journeys}" var="journey">
 						<div class="item">
+		
 							</br>
 							<g:if
 								test="${journey?.startTime?.getAt(Calendar.HOUR_OF_DAY) <= 20 && journey?.startTime?.getAt(Calendar.HOUR_OF_DAY) >= 7}">
@@ -600,7 +601,7 @@
 								</div>
 							</g:if>
 							<div class="content">
-								<div class="header">
+								<div class="header"style="color: #212B27">
 									<h2>
 										<small><g:formatDate date="${journey?.startTime}"
 												type="datetime" style="MEDIUM" /> <i
@@ -610,6 +611,9 @@
 									</h2>
 
 								</div>
+								
+							
+								
 							</div>
 
 							<h3>
@@ -687,7 +691,11 @@
 							</div>
 							</g:if>
 
-
+							<g:if test="${journey?.sensors?.find {it.name == 'Diagnostic Trouble Codes'} != null}">
+							<div class="ui left floated small red label">
+								 Engine Light On!
+							</div>
+							</g:if>
 
 							<g:link controller="journey" action="show" id="${journey.id}"
 								class="ui right floated small red labeled icon button">

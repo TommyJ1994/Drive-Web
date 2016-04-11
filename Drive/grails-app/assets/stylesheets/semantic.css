@@ -35273,3 +35273,7 @@ html.ios body {
     height: 150px;
     border-radius: inherit;
 }
+
+.ui.selection.list .list > .item, .ui.selection.list > .item {
+    color: rgb(45, 33, 33);
+}

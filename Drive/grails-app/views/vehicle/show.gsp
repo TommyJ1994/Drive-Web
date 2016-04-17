@@ -692,7 +692,7 @@
 							</g:if>
 
 							<g:if test="${journey?.sensors?.find {it.name == 'Diagnostic Trouble Codes'} != null}">
-							<div class="ui left floated small red label">
+							<div class="ui left floated small black label">
 								 Engine Light On!
 							</div>
 							</g:if>
